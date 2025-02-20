@@ -44,9 +44,9 @@ const Hero = () => {
             }}
           >
             Have an idea?{" "}
-            <span className="text-primary relative inline-block">
+            <span className="text-[#9b87f5] relative inline-block">
               Turn it into reality in weeks.
-              <span className="absolute -inset-1 bg-primary/10 -z-10 rounded-lg blur-sm" />
+              <span className="absolute -inset-1 bg-[#9b87f5]/10 -z-10 rounded-lg blur-sm" />
             </span>
           </h1>
           <p 
@@ -70,7 +70,7 @@ const Hero = () => {
           >
             <Button 
               size="lg" 
-              className="w-full sm:w-auto px-8 text-lg relative group overflow-hidden"
+              className="w-full sm:w-auto px-8 text-lg"
               onClick={() => {
                 const calculatorSection = document.getElementById("calculator");
                 calculatorSection?.scrollIntoView({ behavior: "smooth" });
@@ -80,7 +80,6 @@ const Hero = () => {
                 Get a Free Quote 
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
-              <span className="absolute inset-0 bg-primary-foreground/10 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
             </Button>
           </div>
         </div>
