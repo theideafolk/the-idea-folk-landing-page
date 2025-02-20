@@ -22,16 +22,20 @@ const CaseStudyCard = ({
 }) => {
   return (
     <div 
-      className="bg-card rounded-lg p-6 border border-border hover:border-primary transition-colors cursor-pointer"
+      className="bg-card rounded-lg p-6 premium-card relative group hover:shadow-xl transition-all duration-500 ease-out"
       onClick={onClick}
     >
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold mb-2 flex items-center justify-between">
+      <div className="relative z-10">
+        <h3 className="text-xl font-semibold mb-2 flex items-center justify-between group-hover:text-primary transition-colors duration-300">
           {title}
-          <ArrowUpRight className="h-5 w-5 text-muted-foreground" />
+          <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
         </h3>
         <p className="text-muted-foreground">{description}</p>
       </div>
+      {/* Gradient border effect */}
+      <div className="absolute inset-px bg-gradient-to-r from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg pointer-events-none" />
+      {/* Background blur effect */}
+      <div className="absolute inset-0 bg-background/50 backdrop-blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
     </div>
   );
 };
@@ -117,22 +121,30 @@ const CaseStudies = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <section id="cases" className="py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+    <section id="cases" className="py-16 relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/50 to-background pointer-events-none" />
+      
+      <div className="container mx-auto px-4 relative">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 slide-up">
           Our Work
         </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8">
+        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 slide-up">
           Explore our portfolio of successful projects across various industries.
         </p>
 
-        <div className="flex justify-center gap-4 mb-8">
+        <div className="flex justify-center gap-4 mb-12 slide-up">
           {["all", "landing", "template", "mvp"].map((category) => (
             <Button
               key={category}
               variant={activeCategory === category ? "default" : "outline"}
               onClick={() => setActiveCategory(category as typeof activeCategory)}
-              className="capitalize"
+              className={`
+                capitalize px-6 py-2 transition-all duration-300
+                ${activeCategory === category 
+                  ? 'shadow-lg shadow-primary/20 scale-105' 
+                  : 'hover:shadow-md hover:shadow-primary/10'}
+              `}
             >
               {category === "all" ? "All Projects" : `${category}s`}
             </Button>
@@ -141,12 +153,17 @@ const CaseStudies = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredProjects.map((project, index) => (
-            <CaseStudyCard
+            <div 
               key={index}
-              title={project.title}
-              description={project.description}
-              onClick={() => setSelectedProject(project)}
-            />
+              className="reveal"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <CaseStudyCard
+                title={project.title}
+                description={project.description}
+                onClick={() => setSelectedProject(project)}
+              />
+            </div>
           ))}
         </div>
       </div>
