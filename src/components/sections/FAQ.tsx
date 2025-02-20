@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { SciFiText } from "../animations/SciFiText";
 
 const FAQ = () => {
   const faqs = [
@@ -27,10 +28,10 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-16 bg-muted">
+    <section className="py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
-          Frequently Asked Questions
+          <SciFiText text="Frequently Asked Questions" />
         </h2>
         <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-16">
           Got questions? We've got answers. If you don't find what you're looking for, feel free to reach out.

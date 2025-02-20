@@ -1,40 +1,18 @@
 
 import { useState } from "react";
-import { ArrowUpRight } from "lucide-react";
 import { Button } from "../ui/button";
 import ProjectPreviewDialog from "./ProjectPreviewDialog";
+import { SciFiText } from "../animations/SciFiText";
+import { CaseStudyCard } from "./CaseStudies/CaseStudyCard";
+import { motion } from "framer-motion";
 
 interface Project {
   title: string;
   description: string;
   url: string;
+  previewUrl?: string;
   category: "landing" | "template" | "mvp";
 }
-
-const CaseStudyCard = ({ 
-  title, 
-  description,
-  onClick
-}: {
-  title: string;
-  description: string;
-  onClick: () => void;
-}) => {
-  return (
-    <div 
-      className="bg-card rounded-lg p-6 border border-border hover:border-primary transition-colors cursor-pointer"
-      onClick={onClick}
-    >
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold mb-2 flex items-center justify-between">
-          {title}
-          <ArrowUpRight className="h-5 w-5 text-muted-foreground" />
-        </h3>
-        <p className="text-muted-foreground">{description}</p>
-      </div>
-    </div>
-  );
-};
 
 const CaseStudies = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -45,69 +23,80 @@ const CaseStudies = () => {
     {
       title: "WiseTutor",
       description: "A modern landing page for an innovative tutoring platform.",
-      url: "https://wisetutor.in/",
+      url: "https://wisetutor.in",
+      previewUrl: "https://wisetutor.in",
       category: "landing"
     },
     {
       title: "DirectShelf",
       description: "E-commerce landing page with direct-to-consumer focus.",
-      url: "https://directshelf.in/",  // Updated to HTTPS
+      url: "https://directshelf.in",
+      previewUrl: "https://directshelf.in",
       category: "landing"
     },
     {
       title: "Beaconhouse Admissions",
       description: "Educational institution admissions portal.",
       url: "https://admissions.beaconhouse.in",
+      previewUrl: "https://admissions.beaconhouse.in",
       category: "landing"
     },
     {
       title: "Beaconhouse Events",
       description: "Event management platform for educational institution.",
-      url: "https://events.beaconhouse.in/",  // Added trailing slash
+      url: "https://events.beaconhouse.in",
+      previewUrl: "https://events.beaconhouse.in",
       category: "landing"
     },
     {
       title: "Beaconhouse Applications",
       description: "Application management system for students.",
-      url: "https://apply.beaconhouse.in/",  // Added trailing slash
+      url: "https://apply.beaconhouse.in",
+      previewUrl: "https://apply.beaconhouse.in",
       category: "landing"
     },
     // Templates
     {
       title: "Biom Landing Page",
       description: "Modern, eco-friendly product showcase template.",
-      url: "https://biom-test-landing-page.netlify.app/",
+      url: "https://biom-test-landing-page.netlify.app",
+      previewUrl: "https://biom-test-landing-page.netlify.app",
       category: "template"
     },
     {
       title: "E-commerce Boilerplate",
       description: "Ready-to-use e-commerce template with modern features.",
-      url: "https://e-commerce-boilerplate-theideafolk.netlify.app/",  // Added trailing slash
+      url: "https://e-commerce-boilerplate-theideafolk.netlify.app",
+      previewUrl: "https://e-commerce-boilerplate-theideafolk.netlify.app",
       category: "template"
     },
     {
       title: "Luxury Travel Concierge",
       description: "High-end travel service template with booking features.",
-      url: "https://luxury-travel-concierge-template.netlify.app/",  // Added trailing slash
+      url: "https://luxury-travel-concierge-template.netlify.app",
+      previewUrl: "https://luxury-travel-concierge-template.netlify.app",
       category: "template"
     },
     {
       title: "Interactive Product Page",
       description: "Dynamic product showcase template with interactive elements.",
-      url: "https://interactive-product-page-template.netlify.app/",
+      url: "https://interactive-product-page-template.netlify.app",
+      previewUrl: "https://interactive-product-page-template.netlify.app",
       category: "template"
     },
     // MVPs
     {
       title: "Sports Apparel MVP",
       description: "Fully functional MVP for sports apparel e-commerce.",
-      url: "https://sports-apparel-mvp.netlify.app/",
+      url: "https://sports-apparel-mvp.netlify.app",
+      previewUrl: "https://sports-apparel-mvp.netlify.app",
       category: "mvp"
     },
     {
       title: "SmartNotes",
       description: "Intelligent note-taking platform (Work in Progress).",
-      url: "https://smartnotes.pro",  // Updated URL
+      url: "https://smartnotes.pro",
+      previewUrl: "https://smartnotes.pro",
       category: "mvp"
     }
   ];
@@ -119,14 +108,31 @@ const CaseStudies = () => {
   return (
     <section id="cases" className="py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
-          Our Work
-        </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8">
+        <motion.h2 
+          className="text-3xl md:text-4xl font-bold text-center mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <SciFiText text="Our Work" />
+        </motion.h2>
+        <motion.p 
+          className="text-muted-foreground text-center max-w-2xl mx-auto mb-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
           Explore our portfolio of successful projects across various industries.
-        </p>
+        </motion.p>
 
-        <div className="flex justify-center gap-4 mb-8">
+        <motion.div 
+          className="flex justify-center gap-4 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+        >
           {["all", "landing", "template", "mvp"].map((category) => (
             <Button
               key={category}
@@ -137,7 +143,7 @@ const CaseStudies = () => {
               {category === "all" ? "All Projects" : `${category}s`}
             </Button>
           ))}
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredProjects.map((project, index) => (
@@ -145,6 +151,7 @@ const CaseStudies = () => {
               key={index}
               title={project.title}
               description={project.description}
+              previewUrl={project.previewUrl}
               onClick={() => setSelectedProject(project)}
             />
           ))}

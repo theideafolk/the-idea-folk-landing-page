@@ -3,18 +3,24 @@ import { Button } from "../ui/button";
 
 const Footer = () => {
   return (
-    <footer className="bg-muted py-12">
+    <footer className="relative py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-xl font-semibold mb-4">The Idea Folk</h3>
+            <div className="relative h-8 w-32 mb-4">
+              <img 
+                src="/logo.jpeg" 
+                alt="The Idea Folk" 
+                className="h-full w-full object-contain"
+              />
+            </div>
             <p className="text-muted-foreground mb-4">
               Your on-demand product team that builds and scales digital solutions.
             </p>
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="font-semibold mb-4 text-primary">Quick Links</h4>
             <ul className="space-y-2">
               <li>
                 <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">
@@ -40,7 +46,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
+            <h4 className="font-semibold mb-4 text-primary">Contact</h4>
             <Button variant="default" size="lg" className="w-full">
               Get in Touch
             </Button>

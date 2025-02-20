@@ -1,6 +1,7 @@
 
 import { useState, useMemo } from "react";
 import { ArrowRight } from "lucide-react";
+import { SciFiText } from "../animations/SciFiText";
 import { Button } from "../ui/button";
 import {
   Select,
@@ -169,7 +170,7 @@ const Calculator = () => {
               onClick={() => setStep(2)}
               disabled={!projectDetails.projectStage || !projectDetails.serviceType}
             >
-              Next <ArrowRight className="ml-2 h-4 w-4" />
+              Next
             </Button>
           </div>
         );
@@ -228,7 +229,7 @@ const Calculator = () => {
             )}
 
             <Button className="w-full" onClick={() => setStep(3)}>
-              Next <ArrowRight className="ml-2 h-4 w-4" />
+              Next
             </Button>
           </div>
         );
@@ -275,7 +276,7 @@ const Calculator = () => {
               onClick={handleSubmit}
               disabled={!projectDetails.email || !projectDetails.phone}
             >
-              Let's Build Something Amazing <ArrowRight className="ml-2 h-4 w-4" />
+              Let's Build Something Amazing
             </Button>
           </div>
         );
@@ -289,7 +290,7 @@ const Calculator = () => {
     <section className="py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
-          Project Calculator
+          <SciFiText text="Project Calculator" />
         </h2>
         <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-16">
           Answer a few quick questions to get an estimated project scope and cost.
@@ -303,11 +304,18 @@ const Calculator = () => {
                     key={i}
                     className={`w-8 h-8 rounded-full flex items-center justify-center ${
                       step === i
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-muted-foreground"
+                        ? "relative"
+                        : "relative"
                     }`}
                   >
+                    <div className={`absolute inset-0 rounded-full ${
+                      step === i ? "bg-primary/20" : "bg-muted/20"
+                    }`} />
+                    <span className={`relative z-10 ${
+                      step === i ? "text-white" : "text-white/60"
+                    }`}>
                     {i}
+                    </span>
                   </div>
                 ))}
               </div>

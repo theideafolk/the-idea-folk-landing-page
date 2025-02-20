@@ -1,10 +1,11 @@
+import { SciFiText } from "../animations/SciFiText";
 
 const About = () => {
   return (
-    <section id="about" className="py-16 bg-muted">
+    <section id="about" className="py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-          Meet the Team
+          <SciFiText text="Meet the Team" />
         </h2>
         <div className="max-w-3xl mx-auto">
           <div className="bg-card rounded-lg p-8 border border-border">

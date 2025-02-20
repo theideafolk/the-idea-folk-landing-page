@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
@@ -18,27 +17,31 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass shadow-sm" : "bg-transparent"
+        isScrolled ? "glass shadow-sm safe-area-padding" : "bg-transparent safe-area-padding"
       }`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <a href="/" className="text-xl font-semibold">
-            The Idea Folk
+      <div className="container">
+        <div className="flex items-center justify-between h-14 xs:h-16 md:h-20">
+          <a href="/" className="relative h-8 w-32">
+            <img 
+              src="/logo.jpeg" 
+              alt="The Idea Folk" 
+              className="h-full w-full object-contain"
+            />
           </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#services" className="hover:text-primary transition-colors">
+          <div className="hidden lg:flex items-center space-x-4 xl:space-x-8">
+            <a href="#services" className="text-foreground hover:text-primary transition-colors">
               Services
             </a>
-            <a href="#process" className="hover:text-primary transition-colors">
+            <a href="#process" className="text-foreground hover:text-primary transition-colors">
               Process
             </a>
-            <a href="#cases" className="hover:text-primary transition-colors">
+            <a href="#cases" className="text-foreground hover:text-primary transition-colors">
               Case Studies
             </a>
-            <a href="#about" className="hover:text-primary transition-colors">
+            <a href="#about" className="text-foreground hover:text-primary transition-colors">
               About
             </a>
             {isScrolled && (
@@ -69,31 +72,31 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden glass absolute top-16 left-0 right-0 p-4">
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-4 safe-area-padding">
               <a
                 href="#services"
-                className="hover:text-primary transition-colors"
+                className="text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Services
               </a>
               <a
                 href="#process"
-                className="hover:text-primary transition-colors"
+                className="text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Process
               </a>
               <a
                 href="#cases"
-                className="hover:text-primary transition-colors"
+                className="text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Case Studies
               </a>
               <a
                 href="#about"
-                className="hover:text-primary transition-colors"
+                className="text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About

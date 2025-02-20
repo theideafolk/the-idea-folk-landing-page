@@ -13,12 +13,31 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1rem",
+        sm: "2rem",
+        lg: "4rem",
+        xl: "5rem",
+        "2xl": "6rem",
+      },
       screens: {
-        "2xl": "1400px",
+        "sm": "640px",   // Mobile landscape
+        "md": "768px",   // Tablets
+        "lg": "1024px",  // Desktop
+        "xl": "1280px",  // Large desktop
+        "2xl": "1536px"  // Extra large screens
       },
     },
     extend: {
+      screens: {
+        'xs': '360px',
+      },
+      spacing: {
+        'safe-top': 'env(safe-area-inset-top)',
+        'safe-bottom': 'env(safe-area-inset-bottom)',
+        'safe-left': 'env(safe-area-inset-left)',
+        'safe-right': 'env(safe-area-inset-right)',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -26,7 +45,7 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#72f2a7",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
