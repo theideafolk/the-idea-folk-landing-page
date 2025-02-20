@@ -18,7 +18,7 @@ const Hero = () => {
           <div className="slide-up">
             <Button 
               size="lg" 
-              className="w-full sm:w-auto px-8 text-lg hover:scale-105 transition-transform duration-300"
+              className="w-full sm:w-auto px-8 text-lg"
               onClick={() => {
                 const calculatorSection = document.getElementById("calculator");
                 calculatorSection?.scrollIntoView({ behavior: "smooth" });

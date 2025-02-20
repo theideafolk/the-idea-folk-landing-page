@@ -4,17 +4,58 @@
 @tailwind utilities;
 
 @layer base {
-  /* ... keep existing code (root and dark theme variables) */
+  :root {
+    --background: 0 0% 96.1%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 214 100% 58%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 5.9% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 214 100% 58%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
 
   * {
     @apply border-border antialiased;
-    cursor: none !important;
   }
 
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
   }
 
   body {
@@ -22,56 +63,14 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  /* Premium Animations */
   .fade-in {
-    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeIn 0.5s ease-in;
   }
 
   .slide-up {
-    animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    animation-fill-mode: both;
+    animation: slideUp 0.5s ease-out;
   }
 
-  .slide-up:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-
-  .slide-up:nth-child(3) {
-    animation-delay: 0.4s;
-  }
-
-  /* Magnetic Effect */
-  .magnetic {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Glass Effect */
-  .glass {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-  }
-
-  .dark .glass {
-    @apply bg-black/30 border-white/10;
-  }
-
-  /* Premium Card Hover */
-  .premium-card {
-    @apply relative overflow-hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .premium-card::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-0;
-    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .premium-card:hover::before {
-    @apply opacity-100;
-  }
-
-  /* Animations */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -83,7 +82,7 @@
 
   @keyframes slideUp {
     from {
-      transform: translateY(30px);
+      transform: translateY(20px);
       opacity: 0;
     }
     to {
@@ -92,48 +91,11 @@
     }
   }
 
-  /* Smooth Transitions */
-  .section-transition {
-    @apply transition-all duration-300 ease-in-out;
+  .glass {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10;
   }
 
-  /* Interactive Elements */
-  button, a, [role="button"] {
-    @apply transition-all duration-300;
-  }
-
-  button:hover, a:hover, [role="button"]:hover {
-    @apply scale-[1.02];
-  }
-
-  /* Section Reveals */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Premium Scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-muted;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-primary/50 rounded-full;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary;
+  .dark .glass {
+    @apply bg-black/30 border-white/10;
   }
 }
