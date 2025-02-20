@@ -9,11 +9,7 @@ const ServiceCard = ({ title, price, features, isPopular = false }: {
   isPopular?: boolean;
 }) => {
   return (
-    <div 
-      className={`float-card holographic rounded-lg p-6 ${
-        isPopular ? 'border-2 border-primary' : 'border border-border'
-      }`}
-    >
+    <div className={`rounded-lg p-6 ${isPopular ? 'border-2 border-primary' : 'border border-border'}`}>
       {isPopular && (
         <span className="inline-block px-3 py-1 text-sm text-primary-foreground bg-primary rounded-full mb-4">
           Most Popular
@@ -31,10 +27,7 @@ const ServiceCard = ({ title, price, features, isPopular = false }: {
           </li>
         ))}
       </ul>
-      <Button 
-        className={`w-full ripple-button ${isPopular ? "energy-trail" : ""}`} 
-        variant={isPopular ? "default" : "outline"}
-      >
+      <Button className="w-full" variant={isPopular ? "default" : "outline"}>
         Get a Free Quote
       </Button>
     </div>
@@ -86,7 +79,7 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-16 gradient-section">
+    <section id="services" className="py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
           Services Tailored to Your Needs
