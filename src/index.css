@@ -4,50 +4,7 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 96.1%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 214 100% 58%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 5.9% 10%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.75rem;
-  }
-
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 214 100% 58%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-  }
+  /* ... keep existing code (root variables) */
 
   * {
     @apply border-border antialiased;
@@ -56,6 +13,7 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -64,30 +22,34 @@
   }
 
   .fade-in {
-    animation: fadeIn 0.5s ease-in;
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
   }
 
   .slide-up {
-    animation: slideUp 0.5s ease-out;
+    animation: slideUp 0.6s ease-out forwards;
+    opacity: 0;
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
+      transform: scale(0.98);
     }
     to {
       opacity: 1;
+      transform: scale(1);
     }
   }
 
   @keyframes slideUp {
     from {
-      transform: translateY(20px);
       opacity: 0;
+      transform: translateY(20px);
     }
     to {
-      transform: translateY(0);
       opacity: 1;
+      transform: translateY(0);
     }
   }
 
@@ -97,5 +59,38 @@
 
   .dark .glass {
     @apply bg-black/30 border-white/10;
+  }
+
+  /* Smooth hover transitions */
+  button, 
+  a, 
+  [role="button"] {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* Section transitions */
+  section {
+    @apply transition-opacity duration-500 ease-out;
+  }
+
+  /* Card hover effects */
+  .interactive-card {
+    @apply transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1;
+  }
+
+  /* Text gradient animation */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary;
+    background-size: 200% 100%;
+    animation: gradient 8s linear infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
   }
 }
