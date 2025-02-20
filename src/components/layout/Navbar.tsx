@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
 
 const Navbar = () => {
@@ -9,7 +9,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > window.innerHeight - 100);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -41,7 +41,16 @@ const Navbar = () => {
             <a href="#about" className="hover:text-primary transition-colors">
               About
             </a>
-            <Button variant="default">Get Quote</Button>
+            {isScrolled && (
+              <Button 
+                onClick={() => {
+                  const calculatorSection = document.getElementById("calculator");
+                  calculatorSection?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Get a Free Quote <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -89,9 +98,18 @@ const Navbar = () => {
               >
                 About
               </a>
-              <Button variant="default" className="w-full">
-                Get Quote
-              </Button>
+              {isScrolled && (
+                <Button 
+                  className="w-full"
+                  onClick={() => {
+                    const calculatorSection = document.getElementById("calculator");
+                    calculatorSection?.scrollIntoView({ behavior: "smooth" });
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Get a Free Quote <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              )}
             </div>
           </div>
         )}

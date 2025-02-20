@@ -15,16 +15,16 @@ const Hero = () => {
             Your on-demand product team that builds and scales digital solutions in
             weeks, not months.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 slide-up">
-            <Button size="lg" className="w-full sm:w-auto">
-              Get a Free Quote <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="w-full sm:w-auto"
+          <div className="slide-up">
+            <Button 
+              size="lg" 
+              className="w-full sm:w-auto px-8 text-lg"
+              onClick={() => {
+                const calculatorSection = document.getElementById("calculator");
+                calculatorSection?.scrollIntoView({ behavior: "smooth" });
+              }}
             >
-              View Our Work
+              Get a Free Quote <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </div>
