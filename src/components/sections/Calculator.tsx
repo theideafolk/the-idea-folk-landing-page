@@ -1,11 +1,250 @@
 
+import { useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+type ProjectDetails = {
+  projectStage: string;
+  serviceType: string;
+  featureCount: string;
+  budget: string;
+  email: string;
+  phone: string;
+};
+
 const Calculator = () => {
+  const [step, setStep] = useState(1);
+  const [projectDetails, setProjectDetails] = useState<ProjectDetails>({
+    projectStage: "",
+    serviceType: "",
+    featureCount: "",
+    budget: "",
+    email: "",
+    phone: "",
+  });
+
+  const handleSubmit = async () => {
+    try {
+      const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
+      if (!webhookUrl) {
+        console.error("Webhook URL not configured");
+        return;
+      }
+
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(projectDetails),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      // Reset form and show success message
+      setProjectDetails({
+        projectStage: "",
+        serviceType: "",
+        featureCount: "",
+        budget: "",
+        email: "",
+        phone: "",
+      });
+      setStep(1);
+      // You could add a toast notification here for success
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      // You could add a toast notification here for error
+    }
+  };
+
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return (
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <Label>What stage is your project in?</Label>
+              <Select
+                value={projectDetails.projectStage}
+                onValueChange={(value) =>
+                  setProjectDetails({ ...projectDetails, projectStage: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select project stage" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="idea">I have an idea</SelectItem>
+                  <SelectItem value="validated">I have validated my idea</SelectItem>
+                  <SelectItem value="prd">I have a PRD</SelectItem>
+                  <SelectItem value="mvp">I have an MVP</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label>What type of service are you looking for?</Label>
+              <Select
+                value={projectDetails.serviceType}
+                onValueChange={(value) =>
+                  setProjectDetails({ ...projectDetails, serviceType: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select service type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="landing">Landing Page</SelectItem>
+                  <SelectItem value="mvp">MVP Development</SelectItem>
+                  <SelectItem value="automation">Workflow Automation</SelectItem>
+                  <SelectItem value="coaching">1:1 Coaching</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Button
+              className="w-full"
+              onClick={() => setStep(2)}
+              disabled={!projectDetails.projectStage || !projectDetails.serviceType}
+            >
+              Next <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        );
+
+      case 2:
+        return (
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <Label>Approximately how many features do you need?</Label>
+              <Select
+                value={projectDetails.featureCount}
+                onValueChange={(value) =>
+                  setProjectDetails({ ...projectDetails, featureCount: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select feature count" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1-3">1-3 features</SelectItem>
+                  <SelectItem value="4-6">4-6 features</SelectItem>
+                  <SelectItem value="7-10">7-10 features</SelectItem>
+                  <SelectItem value="10+">10+ features</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label>What's your approximate budget?</Label>
+              <Select
+                value={projectDetails.budget}
+                onValueChange={(value) =>
+                  setProjectDetails({ ...projectDetails, budget: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select budget range" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="500-1000">$500 - $1,000</SelectItem>
+                  <SelectItem value="1000-5000">$1,000 - $5,000</SelectItem>
+                  <SelectItem value="5000-10000">$5,000 - $10,000</SelectItem>
+                  <SelectItem value="10000+">$10,000+</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Button className="w-full" onClick={() => setStep(3)}>
+              Next <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        );
+
+      case 3:
+        return (
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <Label>Email</Label>
+              <Input
+                type="email"
+                placeholder="your@email.com"
+                value={projectDetails.email}
+                onChange={(e) =>
+                  setProjectDetails({ ...projectDetails, email: e.target.value })
+                }
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Phone Number</Label>
+              <Input
+                type="tel"
+                placeholder="+1 (555) 000-0000"
+                value={projectDetails.phone}
+                onChange={(e) =>
+                  setProjectDetails({ ...projectDetails, phone: e.target.value })
+                }
+              />
+            </div>
+
+            <Button
+              className="w-full"
+              onClick={handleSubmit}
+              disabled={!projectDetails.email || !projectDetails.phone}
+            >
+              Get Your Estimate <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
           Project Calculator
         </h2>
+        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-16">
+          Answer a few quick questions to get an estimated project scope and cost.
+        </p>
+        <div className="max-w-md mx-auto">
+          <div className="bg-card rounded-lg p-6 border border-border">
+            <div className="mb-6">
+              <div className="flex items-center justify-between">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      step === i
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    {i}
+                  </div>
+                ))}
+              </div>
+            </div>
+            {renderStep()}
+          </div>
+        </div>
       </div>
     </section>
   );
