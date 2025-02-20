@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
 import {
@@ -32,6 +32,46 @@ const Calculator = () => {
     phone: "",
   });
 
+  const estimatedBudget = useMemo(() => {
+    let base = 0;
+    
+    // Base price by service type
+    switch (projectDetails.serviceType) {
+      case "landing":
+        base = 499;
+        break;
+      case "mvp":
+        base = 999;
+        break;
+      case "automation":
+        base = 799;
+        break;
+      case "coaching":
+        base = 40; // per hour
+        break;
+    }
+
+    // Multiply based on feature count
+    if (projectDetails.featureCount) {
+      switch (projectDetails.featureCount) {
+        case "1-3":
+          base *= 1;
+          break;
+        case "4-6":
+          base *= 1.5;
+          break;
+        case "7-10":
+          base *= 2;
+          break;
+        case "10+":
+          base *= 2.5;
+          break;
+      }
+    }
+
+    return base > 0 ? base : null;
+  }, [projectDetails.serviceType, projectDetails.featureCount]);
+
   const handleSubmit = async () => {
     try {
       const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
@@ -45,14 +85,16 @@ const Calculator = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(projectDetails),
+        body: JSON.stringify({
+          ...projectDetails,
+          estimatedBudget,
+        }),
       });
 
       if (!response.ok) {
         throw new Error("Failed to submit form");
       }
 
-      // Reset form and show success message
       setProjectDetails({
         projectStage: "",
         serviceType: "",
@@ -62,10 +104,8 @@ const Calculator = () => {
         phone: "",
       });
       setStep(1);
-      // You could add a toast notification here for success
     } catch (error) {
       console.error("Error submitting form:", error);
-      // You could add a toast notification here for error
     }
   };
 
@@ -113,6 +153,16 @@ const Calculator = () => {
                 </SelectContent>
               </Select>
             </div>
+
+            {estimatedBudget && (
+              <div className="p-4 bg-muted rounded-lg text-center">
+                <div className="text-sm text-muted-foreground mb-1">Estimated Starting Price:</div>
+                <div className="text-2xl font-bold text-primary">
+                  ${estimatedBudget.toLocaleString()}
+                  {projectDetails.serviceType === "coaching" && "/hour"}
+                </div>
+              </div>
+            )}
 
             <Button
               className="w-full"
@@ -167,6 +217,16 @@ const Calculator = () => {
               </Select>
             </div>
 
+            {estimatedBudget && (
+              <div className="p-4 bg-muted rounded-lg text-center">
+                <div className="text-sm text-muted-foreground mb-1">Estimated Starting Price:</div>
+                <div className="text-2xl font-bold text-primary">
+                  ${estimatedBudget.toLocaleString()}
+                  {projectDetails.serviceType === "coaching" && "/hour"}
+                </div>
+              </div>
+            )}
+
             <Button className="w-full" onClick={() => setStep(3)}>
               Next <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -200,12 +260,22 @@ const Calculator = () => {
               />
             </div>
 
+            {estimatedBudget && (
+              <div className="p-4 bg-muted rounded-lg text-center">
+                <div className="text-sm text-muted-foreground mb-1">Estimated Starting Price:</div>
+                <div className="text-2xl font-bold text-primary">
+                  ${estimatedBudget.toLocaleString()}
+                  {projectDetails.serviceType === "coaching" && "/hour"}
+                </div>
+              </div>
+            )}
+
             <Button
               className="w-full"
               onClick={handleSubmit}
               disabled={!projectDetails.email || !projectDetails.phone}
             >
-              Get Your Estimate <ArrowRight className="ml-2 h-4 w-4" />
+              Let's Build Something Amazing <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         );
