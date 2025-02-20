@@ -51,7 +51,7 @@ const CaseStudies = () => {
     {
       title: "DirectShelf",
       description: "E-commerce landing page with direct-to-consumer focus.",
-      url: "https://directshelf.in/",  // Updated to HTTPS
+      url: "http://directshelf.in/",
       category: "landing"
     },
     {
@@ -63,13 +63,13 @@ const CaseStudies = () => {
     {
       title: "Beaconhouse Events",
       description: "Event management platform for educational institution.",
-      url: "https://events.beaconhouse.in/",  // Added trailing slash
+      url: "https://events.beaconhouse.in",
       category: "landing"
     },
     {
       title: "Beaconhouse Applications",
       description: "Application management system for students.",
-      url: "https://apply.beaconhouse.in/",  // Added trailing slash
+      url: "https://apply.beaconhouse.in",
       category: "landing"
     },
     // Templates
@@ -82,13 +82,13 @@ const CaseStudies = () => {
     {
       title: "E-commerce Boilerplate",
       description: "Ready-to-use e-commerce template with modern features.",
-      url: "https://e-commerce-boilerplate-theideafolk.netlify.app/",  // Added trailing slash
+      url: "https://e-commerce-boilerplate-theideafolk.netlify.app",
       category: "template"
     },
     {
       title: "Luxury Travel Concierge",
       description: "High-end travel service template with booking features.",
-      url: "https://luxury-travel-concierge-template.netlify.app/",  // Added trailing slash
+      url: "https://luxury-travel-concierge-template.netlify.app",
       category: "template"
     },
     {
@@ -107,7 +107,7 @@ const CaseStudies = () => {
     {
       title: "SmartNotes",
       description: "Intelligent note-taking platform (Work in Progress).",
-      url: "https://smartnotes.pro",  // Updated URL
+      url: "https://www.smartnotes.pro",
       category: "mvp"
     }
   ];
