@@ -1,6 +1,16 @@
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 
+const GlowingBar = () => (
+  <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 bg-primary/10" />
+    <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary/20" />
+    <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
+    <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary via-transparent to-primary" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,hsl(var(--primary))_0%,transparent_70%)] opacity-20" />
+  </div>
+);
+
 export const ScrollProgress = () => {
   const { scrollYProgress } = useScroll();
   const scaleY = useSpring(scrollYProgress, {
@@ -27,12 +37,29 @@ export const ScrollProgress = () => {
     <>
       {/* Progress bar */}
       <motion.div
-        className="fixed top-0 right-0 w-1 h-screen bg-primary/10 z-50 origin-top"
+        className="fixed top-0 right-0 w-2 h-screen z-50 origin-top"
         style={{ scaleY }}
       >
-        <div className="absolute inset-0 bg-primary/50" />
-        <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-transparent to-primary/80" />
-        <div className="absolute bottom-0 w-full h-2 bg-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" />
+        <GlowingBar />
+        <motion.div 
+          className="absolute inset-0 bg-primary"
+          style={{ scaleY }}
+          initial={{ opacity: 0.5 }}
+          animate={{ opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-transparent via-primary/30 to-primary/80">
+          <div className="absolute bottom-0 w-full h-4 bg-primary rounded-t-full">
+            <div className="absolute inset-0 animate-pulse bg-primary/50 rounded-t-full" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary))_0%,transparent_70%)] blur-sm" />
+          </div>
+        </div>
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-primary/80 via-primary/30 to-transparent">
+          <div className="absolute top-0 w-full h-4 bg-primary rounded-b-full">
+            <div className="absolute inset-0 animate-pulse bg-primary/50 rounded-b-full" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,hsl(var(--primary))_0%,transparent_70%)] blur-sm" />
+          </div>
+        </div>
       </motion.div>
 
       {/* Background color transition based on scroll */}

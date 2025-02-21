@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from "react";
 import { ArrowRight } from "lucide-react";
 import { SciFiText } from "../animations/SciFiText";
@@ -124,7 +123,7 @@ const Calculator = () => {
                 }
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select project stage" />
+                  <SelectValue placeholder="How ready is your idea?" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="idea">I have an idea</SelectItem>
@@ -144,7 +143,7 @@ const Calculator = () => {
                 }
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select service type" />
+                  <SelectValue placeholder="What can we help you with?" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="landing">Landing Page</SelectItem>
@@ -187,7 +186,7 @@ const Calculator = () => {
                 }
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select feature count" />
+                  <SelectValue placeholder="How complex is your project?" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="1-3">1-3 features</SelectItem>
@@ -207,7 +206,7 @@ const Calculator = () => {
                 }
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select budget range" />
+                  <SelectValue placeholder="What's your investment range?" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="500-1000">$500 - $1,000</SelectItem>
@@ -241,7 +240,8 @@ const Calculator = () => {
               <Label>Email</Label>
               <Input
                 type="email"
-                placeholder="your@email.com"
+                placeholder="Where can we reach you?"
+                className="text-white/50 placeholder:text-white/50"
                 value={projectDetails.email}
                 onChange={(e) =>
                   setProjectDetails({ ...projectDetails, email: e.target.value })
@@ -253,7 +253,8 @@ const Calculator = () => {
               <Label>Phone Number</Label>
               <Input
                 type="tel"
-                placeholder="+1 (555) 000-0000"
+                placeholder="Your phone number"
+                className="text-white/50 placeholder:text-white/50"
                 value={projectDetails.phone}
                 onChange={(e) =>
                   setProjectDetails({ ...projectDetails, phone: e.target.value })
@@ -298,23 +299,41 @@ const Calculator = () => {
         <div className="max-w-md mx-auto">
           <div className="bg-card rounded-lg p-6 border border-border">
             <div className="mb-6">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between relative">
+                <div className="absolute top-1/2 left-0 w-full h-0.5 bg-muted/20 -translate-y-1/2" />
+                <div 
+                  className="absolute top-1/2 left-0 h-0.5 bg-primary/50 -translate-y-1/2 transition-all duration-300"
+                  style={{ 
+                    width: `${((step - 1) / 2) * 100}%`,
+                  }}
+                >
+                  <div className="absolute right-0 top-1/2 w-4 h-4 -translate-y-1/2 translate-x-full">
+                    <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping" />
+                  </div>
+                </div>
                 {[1, 2, 3].map((i) => (
                   <div
                     key={i}
-                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      step === i
-                        ? "relative"
-                        : "relative"
-                    }`}
+                    className="relative z-10 w-8 h-8 rounded-full flex items-center justify-center"
                   >
-                    <div className={`absolute inset-0 rounded-full ${
-                      step === i ? "bg-primary/20" : "bg-muted/20"
-                    }`} />
-                    <span className={`relative z-10 ${
-                      step === i ? "text-white" : "text-white/60"
+                    <div 
+                      className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                        i < step ? "bg-primary scale-100" :
+                        i === step ? "bg-primary/20 scale-110" :
+                        "bg-muted/20 scale-100"
+                      }`} 
+                    />
+                    <div 
+                      className={`absolute inset-0 rounded-full ${
+                        i === step ? "animate-ping bg-primary/20" : ""
+                      }`}
+                    />
+                    <span className={`relative z-10 transition-colors duration-300 ${
+                      i < step ? "text-primary-foreground" :
+                      i === step ? "text-white" :
+                      "text-white/60"
                     }`}>
-                    {i}
+                      {i}
                     </span>
                   </div>
                 ))}

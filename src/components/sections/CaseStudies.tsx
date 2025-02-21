@@ -30,8 +30,8 @@ const CaseStudies = () => {
     {
       title: "DirectShelf",
       description: "E-commerce landing page with direct-to-consumer focus.",
-      url: "https://directshelf.in",
-      previewUrl: "https://directshelf.in",
+      url: "https://direct-shelf.netlify.app",
+      previewUrl: "https://direct-shelf.netlify.app",
       category: "landing"
     },
     {
@@ -140,7 +140,7 @@ const CaseStudies = () => {
               onClick={() => setActiveCategory(category as typeof activeCategory)}
               className="capitalize"
             >
-              {category === "all" ? "All Projects" : `${category}s`}
+              {category === "all" ? "All Projects" : category === "mvp" ? "MVPs" : `${category}s`}
             </Button>
           ))}
         </motion.div>

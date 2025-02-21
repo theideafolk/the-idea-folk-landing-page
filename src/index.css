@@ -96,11 +96,11 @@
   }
 
   .glass {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10;
+    @apply backdrop-blur-xl bg-black/80 border border-white/10;
   }
 
   .dark .glass {
-    @apply bg-black/30 border-white/10;
+    @apply bg-black/80 border-white/10;
   }
 
   /* Mobile-first media queries */

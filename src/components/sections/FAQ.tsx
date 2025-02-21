@@ -1,4 +1,3 @@
-
 import {
   Accordion,
   AccordionContent,
@@ -11,19 +10,19 @@ const FAQ = () => {
   const faqs = [
     {
       question: "How do you build so fast?",
-      answer: "We combine cutting-edge AI tools with battle-tested product experience. No learning on your dime - we leverage our expertise to deliver rapid results.",
+      answer: "We combine cutting-edge AI tools with battle-tested product experience. No learning on your dime - we leverage our expertise to deliver rapid results."
     },
     {
       question: "What if my project is complex?",
-      answer: "We'll be honest upfront. If it needs more time, we'll tell you. But most MVPs can be launched within the timeframe we've discussed.",
+      answer: "We'll be honest upfront. If it needs more time, we'll tell you. But most MVPs can be launched within the timeframe we've discussed."
     },
     {
       question: "What's included in your services?",
-      answer: "Everything needed to test with real users. No hidden costs, no surprises.",
+      answer: "Everything needed to test with real users. No hidden costs, no surprises."
     },
     {
       question: "Do you offer other services beyond MVPs and landing pages?",
-      answer: "Yes, we also offer workflow automation, content strategy, strategic growth consulting, and 1:1 coaching.",
+      answer: "Yes, we also offer workflow automation, content strategy, strategic growth consulting, and 1:1 coaching."
     },
   ];
 
@@ -39,9 +38,9 @@ const FAQ = () => {
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger>{faq.question}</AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
+              <AccordionItem key={index} value={`item-${index}`} className="border-b border-white/10">
+                <AccordionTrigger className="text-white hover:text-white/90">{faq.question}</AccordionTrigger>
+                <AccordionContent className="text-white/90">{faq.answer}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>

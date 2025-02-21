@@ -6,11 +6,11 @@ import { SciFiText } from "../animations/SciFiText";
 const ServiceCardAnimated = ({ title, price, features, isPopular = false, index = 0 }) => {
   return (
     <motion.div
+      className={`rounded-lg p-6 relative flex flex-col h-full ${isPopular ? 'border-2 border-primary' : 'border border-border'}`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`rounded-lg p-6 relative ${isPopular ? 'border-2 border-primary' : 'border border-border'}`}
     >
       {isPopular && (
         <motion.span 
@@ -22,16 +22,12 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
           Most Popular
         </motion.span>
       )}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.3 + index * 0.1 }} 
-      >
+      <div className="flex flex-col h-full">
         <h3 className="text-xl font-semibold mb-2 text-foreground relative z-10">{title}</h3>
         <div className="mb-4">
           <span className="text-3xl font-bold text-primary relative z-10">{price}</span>
         </div>
-        <ul className="space-y-3 mb-6">
+        <ul className="space-y-3 flex-1">
           {features.map((feature, i) => (
             <motion.li
               key={i}
@@ -40,21 +36,19 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
               transition={{ delay: 0.4 + i * 0.1 }}
               className="flex items-start gap-2"
             >
-              <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-              <span className="text-foreground relative z-10">{feature}</span>
+              <Check className="h-5 w-5 text-primary shrink-0" />
+              <span className="text-foreground">{feature}</span>
             </motion.li>
           ))}
         </ul>
-        <Button 
-          className="w-full relative bg-transparent border border-primary/50 text-foreground hover:border-primary overflow-hidden group"
-        >
-          <div className="absolute inset-0 bg-primary/10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent animate-shimmer" />
-          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-          <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-r from-primary/50 via-transparent to-primary/50" />
-          <span className="relative z-10">Get a Free Quote</span>
-        </Button>
-      </motion.div>
+        <div className="mt-6">
+          <Button
+            className="w-full relative bg-transparent border border-primary text-foreground hover:border-primary overflow-hidden group"
+          >
+            <span className="relative z-10">Get a Free Quote</span>
+          </Button>
+        </div>
+      </div>
       {isPopular && (
         <motion.div
           className="absolute -inset-px rounded-lg bg-primary/10"
@@ -64,51 +58,6 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
         />
       )}
     </motion.div>
-  );
-};
-
-const ServiceCard = ({ title, price, features, isPopular = false }: { 
-  title: string;
-  price: string;
-  features: string[];
-  isPopular?: boolean;
-}) => {
-  return (
-    <div className={`rounded-lg p-6 ${isPopular ? 'border-2 border-primary' : 'border border-border'}`}>
-      {isPopular && (
-        <span className="inline-block px-3 py-1 text-sm text-primary-foreground bg-primary rounded-full mb-4">
-          Most Popular
-        </span>
-      )}
-      <h3 className="text-xl font-semibold mb-2 text-foreground">{title}</h3>
-      <div className="mb-4">
-        <span className="text-3xl font-bold text-primary">{price}</span>
-      </div>
-      <ul className="space-y-3 mb-6">
-        {features.map((feature, index) => (
-          <li key={index} className="flex items-start gap-2">
-            <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-            <span className="text-foreground">{feature}</span>
-          </li>
-        ))}
-      </ul>
-      <Button 
-        className={`w-full relative bg-gradient-to-r ${
-          isPopular 
-            ? 'from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70' 
-            : 'border border-primary/50 hover:border-primary'
-        } transition-all duration-300 group overflow-hidden`}
-        variant={isPopular ? "default" : "outline"}
-      >
-        <motion.div
-          className="absolute inset-0 bg-primary/20"
-          initial={{ scale: 0, opacity: 0 }}
-          whileHover={{ scale: 1.5, opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        />
-        Get a Free Quote
-      </Button>
-    </div>
   );
 };
 

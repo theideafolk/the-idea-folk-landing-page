@@ -22,9 +22,9 @@ const Navbar = () => {
     >
       <div className="container">
         <div className="flex items-center justify-between h-14 xs:h-16 md:h-20">
-          <a href="/" className="relative h-8 w-32">
+          <a href="/" className="relative h-12 w-48">
             <img 
-              src="/logo.jpeg" 
+              src="/logo-transparent.png" 
               alt="The Idea Folk" 
               className="h-full w-full object-contain"
             />
@@ -51,7 +51,7 @@ const Navbar = () => {
                   calculatorSection?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Get a Free Quote <ArrowRight className="ml-2 h-4 w-4" />
+                Get a Free Quote
               </Button>
             )}
           </div>
@@ -60,11 +60,12 @@ const Navbar = () => {
           <button
             className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-6 w-6 text-primary" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6 text-primary" />
             )}
           </button>
         </div>
@@ -101,18 +102,6 @@ const Navbar = () => {
               >
                 About
               </a>
-              {isScrolled && (
-                <Button 
-                  className="w-full"
-                  onClick={() => {
-                    const calculatorSection = document.getElementById("calculator");
-                    calculatorSection?.scrollIntoView({ behavior: "smooth" });
-                    setIsMenuOpen(false);
-                  }}
-                >
-                  Get a Free Quote <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              )}
             </div>
           </div>
         )}
