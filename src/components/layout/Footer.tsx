@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <a href="/" className="relative block h-12 w-48 mb-4">
               <img 
-                src="/logo-transparent.png" 
+                src="/the-idea-folk-logo.png" 
                 alt="The Idea Folk" 
                 className="h-full w-full object-contain"
               />

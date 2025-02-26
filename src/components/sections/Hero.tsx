@@ -1,18 +1,51 @@
-
 import { ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { SciFiText } from "../animations/SciFiText";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { CalculatorModal } from "./CalculatorModal";
 
-const FloatingParticles = () => {
+const SparkleEffects = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0 bg-grid-white/10" />
-      {Array.from({ length: 20 }).map((_, i) => (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {/* Top-right sparkle cluster */}
+      <motion.div 
+        className="absolute top-[15%] right-[15%]"
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, 15, -15, 0],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      >
+        <Sparkles className="w-8 h-8 text-primary [filter:_drop-shadow(0_0_15px_hsl(var(--primary)))]" />
+      </motion.div>
+
+      {/* Bottom-left sparkle cluster */}
+      <motion.div 
+        className="absolute bottom-[25%] left-[20%]"
+        animate={{
+          scale: [1.2, 1, 1.2],
+          rotate: [-15, 0, 15, -15],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      >
+        <Sparkles className="w-6 h-6 text-primary [filter:_drop-shadow(0_0_15px_hsl(var(--primary)))]" />
+      </motion.div>
+
+      {/* Floating particles */}
+      {Array.from({ length: 10 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-primary/20 rounded-full"
+          className="absolute w-1 h-1 bg-primary/30 rounded-full"
           initial={{ 
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight 
@@ -23,7 +56,7 @@ const FloatingParticles = () => {
             scale: [1, 1.2, 1],
           }}
           transition={{
-            duration: Math.random() * 10 + 10,
+            duration: Math.random() * 5 + 5,
             repeat: Infinity,
             ease: "linear"
           }}
@@ -53,6 +86,7 @@ const TextReveal = ({ children, delay = 0 }) => {
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -72,8 +106,9 @@ const Hero = () => {
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden">
+      <SparkleEffects />
       <motion.div 
-        className="container relative mx-auto px-4"
+        className="container relative mx-auto px-4 z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -94,13 +129,12 @@ const Hero = () => {
           <h1 className="relative text-4xl md:text-6xl font-bold tracking-tight mb-6">
             <span className="text-foreground">Have an idea?</span>
             {" "}
-            <span className="text-primary relative">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary to-white/80 relative [text-shadow:_0_0_30px_hsl(var(--primary)_/_0.3)]">
               Turn it into reality
             </span>
             {" "}
             <span className="relative">
               <SciFiText text="in weeks, not months" delay={0.2} />
-              <Sparkles className="absolute -right-8 -top-6 w-6 h-6 text-primary animate-pulse" />
             </span>
           </h1>
           <motion.p 
@@ -117,38 +151,52 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="relative"
           >
-            <Button 
-              size="lg"
-              className="w-full sm:w-auto px-8 text-lg"
-              onClick={() => {
-                const calculatorSection = document.getElementById("calculator");
-                calculatorSection?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Get a Free Quote
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button 
+                size="lg"
+                className="w-full sm:w-auto px-8 text-lg relative overflow-hidden bg-primary text-background font-semibold hover:bg-primary/90"
+                onClick={() => {
+                  const inquirySection = document.getElementById("inquiry");
+                  inquirySection?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Start Building
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto px-8 text-lg opacity-80 hover:opacity-100"
+                onClick={() => setIsCalculatorOpen(true)}
+              >
+                Calculate Cost
+              </Button>
+            </div>
             
             <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">10+</div>
+                <div className="text-3xl font-bold text-white mb-2">10+</div>
                 <div className="text-sm text-muted-foreground">Projects Delivered</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">70%</div>
+                <div className="text-3xl font-bold text-white mb-2">70%</div>
                 <div className="text-sm text-muted-foreground">Lower Development Costs</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">4+</div>
+                <div className="text-3xl font-bold text-white mb-2">4+</div>
                 <div className="text-sm text-muted-foreground">Happy Clients</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">9+</div>
+                <div className="text-3xl font-bold text-white mb-2">9+</div>
                 <div className="text-sm text-muted-foreground">Years Experience</div>
               </div>
             </div>
           </motion.div>
         </div>
       </motion.div>
+      <CalculatorModal 
+        open={isCalculatorOpen} 
+        onOpenChange={setIsCalculatorOpen} 
+      />
     </section>
   );
 };

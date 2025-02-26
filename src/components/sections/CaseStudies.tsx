@@ -11,7 +11,7 @@ interface Project {
   description: string;
   url: string;
   previewUrl?: string;
-  category: "landing" | "template" | "mvp";
+  category: "landing" | "template" | "mvp" | "in-progress";
 }
 
 const CaseStudies = () => {
@@ -35,21 +35,21 @@ const CaseStudies = () => {
       category: "landing"
     },
     {
-      title: "Beaconhouse Admissions",
+      title: "Edtech Admissions",
       description: "Educational institution admissions portal.",
       url: "https://admissions.beaconhouse.in",
       previewUrl: "https://admissions.beaconhouse.in",
       category: "landing"
     },
     {
-      title: "Beaconhouse Events",
+      title: "Edtech Events",
       description: "Event management platform for educational institution.",
       url: "https://events.beaconhouse.in",
       previewUrl: "https://events.beaconhouse.in",
       category: "landing"
     },
     {
-      title: "Beaconhouse Applications",
+      title: "Edtech Applications",
       description: "Application management system for students.",
       url: "https://apply.beaconhouse.in",
       previewUrl: "https://apply.beaconhouse.in",
@@ -97,7 +97,14 @@ const CaseStudies = () => {
       description: "Intelligent note-taking platform (Work in Progress).",
       url: "https://smartnotes.pro",
       previewUrl: "https://smartnotes.pro",
-      category: "mvp"
+      category: "in-progress"
+    },
+    {
+      title: "School CRM Software",
+      description: "Comprehensive school management system with advanced CRM features.",
+      url: "https://school-crm-theideafolk.netlify.app",
+      previewUrl: "https://school-crm-theideafolk.netlify.app",
+      category: "in-progress"
     }
   ];
 
@@ -133,14 +140,17 @@ const CaseStudies = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          {["all", "landing", "template", "mvp"].map((category) => (
+          {["all", "landing", "template", "mvp", "in-progress"].map((category) => (
             <Button
               key={category}
               variant={activeCategory === category ? "default" : "outline"}
               onClick={() => setActiveCategory(category as typeof activeCategory)}
               className="capitalize"
             >
-              {category === "all" ? "All Projects" : category === "mvp" ? "MVPs" : `${category}s`}
+              {category === "all" ? "All Projects" : 
+               category === "mvp" ? "MVPs" : 
+               category === "in-progress" ? "In Progress" :
+               `${category}s`}
             </Button>
           ))}
         </motion.div>

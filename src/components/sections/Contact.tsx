@@ -16,13 +16,13 @@ const Contact = () => {
           </p>
           <Button 
             size="lg" 
-            className="text-lg px-8 w-full sm:w-auto"
+            className="text-lg px-8 w-full sm:w-auto bg-primary text-background font-semibold hover:bg-primary/90"
             onClick={() => {
-              const calculatorSection = document.getElementById("calculator");
-              calculatorSection?.scrollIntoView({ behavior: "smooth" });
+              const inquirySection = document.getElementById("inquiry");
+              inquirySection?.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            Get a Free Quote
+            Start Building
           </Button>
         </div>
       </div>

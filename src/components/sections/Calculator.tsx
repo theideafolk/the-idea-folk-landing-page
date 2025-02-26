@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { SciFiText } from "../animations/SciFiText";
 import { Button } from "../ui/button";
 import {
@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 type ProjectDetails = {
   projectStage: string;
   serviceType: string;
+  isNGO: boolean;
   featureCount: string;
   budget: string;
   email: string;
@@ -26,6 +27,7 @@ const Calculator = () => {
   const [projectDetails, setProjectDetails] = useState<ProjectDetails>({
     projectStage: "",
     serviceType: "",
+    isNGO: false,
     featureCount: "",
     budget: "",
     email: "",
@@ -34,6 +36,11 @@ const Calculator = () => {
 
   const estimatedBudget = useMemo(() => {
     let base = 0;
+    
+    // Return null if NGO/social cause is selected - we'll work with their budget
+    if (projectDetails.isNGO) {
+      return null;
+    }
     
     // Base price by service type
     switch (projectDetails.serviceType) {
@@ -98,6 +105,7 @@ const Calculator = () => {
       setProjectDetails({
         projectStage: "",
         serviceType: "",
+        isNGO: false,
         featureCount: "",
         budget: "",
         email: "",
@@ -135,6 +143,29 @@ const Calculator = () => {
             </div>
 
             <div className="space-y-2">
+              <Label>Are you building for a social cause or NGO?</Label>
+              <Select
+                value={projectDetails.isNGO ? "yes" : "no"}
+                onValueChange={(value) =>
+                  setProjectDetails({ ...projectDetails, isNGO: value === "yes" })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select an option" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="no">No, this is a commercial project</SelectItem>
+                  <SelectItem value="yes">Yes, this is for a social cause/NGO</SelectItem>
+                </SelectContent>
+              </Select>
+              {projectDetails.isNGO && (
+                <p className="text-sm text-muted-foreground italic">
+                  For social causes and NGOs, we offer flexible pricing based on your budget. Let's discuss how we can help you make a difference.
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
               <Label>What type of service are you looking for?</Label>
               <Select
                 value={projectDetails.serviceType}
@@ -154,7 +185,7 @@ const Calculator = () => {
               </Select>
             </div>
 
-            {estimatedBudget && (
+            {estimatedBudget !== null && (
               <div className="p-4 bg-muted rounded-lg text-center">
                 <div className="text-sm text-muted-foreground mb-1">Estimated Starting Price:</div>
                 <div className="text-2xl font-bold text-primary">
@@ -164,13 +195,27 @@ const Calculator = () => {
               </div>
             )}
 
-            <Button
-              className="w-full"
-              onClick={() => setStep(2)}
-              disabled={!projectDetails.projectStage || !projectDetails.serviceType}
-            >
-              Next
-            </Button>
+            <div className="flex gap-4">
+              <div className="flex w-full flex-col sm:flex-row gap-4">
+                <Button
+                  variant="outline"
+                  className="w-full sm:w-32"
+                  onClick={() => setStep(3)}
+                  disabled
+                >
+                  <ArrowLeft className="h-4 w-4 sm:hidden" />
+                  <span className="hidden sm:inline">Prev</span>
+                </Button>
+                <Button
+                  className="w-full sm:w-32"
+                  onClick={() => setStep(2)}
+                  disabled={!projectDetails.projectStage || !projectDetails.serviceType}
+                >
+                  <span className="hidden sm:inline">Next</span>
+                  <ArrowRight className="h-4 w-4 sm:hidden" />
+                </Button>
+              </div>
+            </div>
           </div>
         );
 
@@ -217,7 +262,7 @@ const Calculator = () => {
               </Select>
             </div>
 
-            {estimatedBudget && (
+            {estimatedBudget !== null ? (
               <div className="p-4 bg-muted rounded-lg text-center">
                 <div className="text-sm text-muted-foreground mb-1">Estimated Starting Price:</div>
                 <div className="text-2xl font-bold text-primary">
@@ -225,11 +270,34 @@ const Calculator = () => {
                   {projectDetails.serviceType === "coaching" && "/hour"}
                 </div>
               </div>
+            ) : projectDetails.isNGO && (
+              <div className="p-4 bg-muted rounded-lg text-center">
+                <div className="text-sm text-muted-foreground mb-1">Social Impact Pricing</div>
+                <div className="text-lg text-primary">
+                  We'll work within your budget to support your cause
+                </div>
+              </div>
             )}
 
-            <Button className="w-full" onClick={() => setStep(3)}>
-              Next
-            </Button>
+            <div className="flex gap-4">
+              <div className="flex w-full flex-col sm:flex-row gap-4">
+                <Button
+                  variant="outline"
+                  className="w-full sm:w-32"
+                  onClick={() => setStep(1)}
+                >
+                  <ArrowLeft className="h-4 w-4 sm:hidden" />
+                  <span className="hidden sm:inline">Prev</span>
+                </Button>
+                <Button
+                  className="w-full sm:w-32"
+                  onClick={() => setStep(3)}
+                >
+                  <span className="hidden sm:inline">Next</span>
+                  <ArrowRight className="h-4 w-4 sm:hidden" />
+                </Button>
+              </div>
+            </div>
           </div>
         );
 
@@ -262,7 +330,7 @@ const Calculator = () => {
               />
             </div>
 
-            {estimatedBudget && (
+            {estimatedBudget !== null ? (
               <div className="p-4 bg-muted rounded-lg text-center">
                 <div className="text-sm text-muted-foreground mb-1">Estimated Starting Price:</div>
                 <div className="text-2xl font-bold text-primary">
@@ -270,15 +338,34 @@ const Calculator = () => {
                   {projectDetails.serviceType === "coaching" && "/hour"}
                 </div>
               </div>
+            ) : projectDetails.isNGO && (
+              <div className="p-4 bg-muted rounded-lg text-center">
+                <div className="text-sm text-muted-foreground mb-1">Social Impact Pricing</div>
+                <div className="text-lg text-primary">
+                  We'll work within your budget to support your cause
+                </div>
+              </div>
             )}
 
-            <Button
-              className="w-full"
-              onClick={handleSubmit}
-              disabled={!projectDetails.email || !projectDetails.phone}
-            >
-              Let's Build Something Amazing
-            </Button>
+            <div className="flex gap-4">
+              <div className="flex w-full flex-col sm:flex-row gap-4">
+                <Button
+                  variant="outline"
+                  className="w-full sm:w-32"
+                  onClick={() => setStep(2)}
+                >
+                  <ArrowLeft className="h-4 w-4 sm:hidden" />
+                  <span className="hidden sm:inline">Prev</span>
+                </Button>
+                <Button
+                  className="w-full"
+                  onClick={handleSubmit}
+                  disabled={!projectDetails.email || !projectDetails.phone}
+                >
+                  Let's Build Something Amazing
+                </Button>
+              </div>
+            </div>
           </div>
         );
 
@@ -288,63 +375,52 @@ const Calculator = () => {
   };
 
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
-          <SciFiText text="Project Calculator" />
-        </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-16">
-          Answer a few quick questions to get an estimated project scope and cost.
-        </p>
-        <div className="max-w-md mx-auto">
-          <div className="bg-card rounded-lg p-6 border border-border">
-            <div className="mb-6">
-              <div className="flex items-center justify-between relative">
-                <div className="absolute top-1/2 left-0 w-full h-0.5 bg-muted/20 -translate-y-1/2" />
-                <div 
-                  className="absolute top-1/2 left-0 h-0.5 bg-primary/50 -translate-y-1/2 transition-all duration-300"
-                  style={{ 
-                    width: `${((step - 1) / 2) * 100}%`,
-                  }}
-                >
-                  <div className="absolute right-0 top-1/2 w-4 h-4 -translate-y-1/2 translate-x-full">
-                    <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping" />
-                  </div>
-                </div>
-                {[1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="relative z-10 w-8 h-8 rounded-full flex items-center justify-center"
-                  >
-                    <div 
-                      className={`absolute inset-0 rounded-full transition-all duration-300 ${
-                        i < step ? "bg-primary scale-100" :
-                        i === step ? "bg-primary/20 scale-110" :
-                        "bg-muted/20 scale-100"
-                      }`} 
-                    />
-                    <div 
-                      className={`absolute inset-0 rounded-full ${
-                        i === step ? "animate-ping bg-primary/20" : ""
-                      }`}
-                    />
-                    <span className={`relative z-10 transition-colors duration-300 ${
-                      i < step ? "text-primary-foreground" :
-                      i === step ? "text-white" :
-                      "text-white/60"
-                    }`}>
-                      {i}
-                    </span>
-                  </div>
-                ))}
-              </div>
+    <div className="space-y-6">
+      <div className="mb-6">
+        <div className="flex items-center justify-between relative">
+          <div className="absolute top-1/2 left-0 w-full h-0.5 bg-muted/20 -translate-y-1/2" />
+          <div 
+            className="absolute top-1/2 left-0 h-0.5 bg-primary/50 -translate-y-1/2 transition-all duration-300"
+            style={{ 
+              width: `${((step - 1) / 2) * 100}%`,
+            }}
+          >
+            <div className="absolute right-0 top-1/2 w-4 h-4 -translate-y-1/2 translate-x-full">
+              <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping" />
             </div>
-            {renderStep()}
           </div>
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="relative z-10 w-8 h-8 rounded-full flex items-center justify-center"
+            >
+              <div 
+                className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                  i < step ? "bg-primary scale-100" :
+                  i === step ? "bg-primary/20 scale-110" :
+                  "bg-muted/20 scale-100"
+                }`} 
+              />
+              <div 
+                className={`absolute inset-0 rounded-full ${
+                  i === step ? "animate-ping bg-primary/20" : ""
+                }`}
+              />
+              <span className={`relative z-10 transition-colors duration-300 ${
+                i < step ? "text-primary-foreground" :
+                i === step ? "text-white" :
+                "text-white/60"
+              }`}>
+                {i}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
-    </section>
+      {renderStep()}
+    </div>
   );
 };
 
 export default Calculator;
+export { Calculator }

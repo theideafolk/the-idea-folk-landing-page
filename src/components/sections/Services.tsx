@@ -17,9 +17,13 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="inline-block px-3 py-1 text-sm text-primary-foreground bg-primary rounded-full mb-4"
+          className="relative inline-block px-3 py-1 text-sm text-foreground rounded-full mb-4 bg-transparent border border-primary overflow-hidden group"
         >
-          Most Popular
+          <div className="absolute inset-0 bg-primary/10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent animate-shimmer" />
+          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+          <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-r from-primary/50 via-transparent to-primary/50" />
+          <span className="relative z-10">Most Popular</span>
         </motion.span>
       )}
       <div className="flex flex-col h-full">
@@ -43,9 +47,15 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
         </ul>
         <div className="mt-6">
           <Button
-            className="w-full relative bg-transparent border border-primary text-foreground hover:border-primary overflow-hidden group"
+            className="w-full relative overflow-hidden group"
+            variant="default"
+            className="w-full relative overflow-hidden group bg-primary text-background font-semibold hover:bg-primary/90"
+            onClick={() => {
+              const inquirySection = document.getElementById("inquiry");
+              inquirySection?.scrollIntoView({ behavior: "smooth" });
+            }}
           >
-            <span className="relative z-10">Get a Free Quote</span>
+            Start Building
           </Button>
         </div>
       </div>

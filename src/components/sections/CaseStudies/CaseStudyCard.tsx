@@ -45,13 +45,13 @@ export const CaseStudyCard = ({
       >
         <HolographicOverlay />
         <div className="relative z-10">
-          <div className="aspect-video w-full mb-4 overflow-hidden rounded-md bg-muted relative">
+          <div className="w-full h-48 sm:h-56 md:h-64 mb-4 overflow-hidden rounded-md bg-muted relative">
             {previewUrl && !imageError ? (
               <img
                 src={`https://api.microlink.io/?url=${encodeURIComponent(previewUrl)}&screenshot=true&meta=false&embed=screenshot.url`}
                 alt={title}
                 className={cn(
-                  "w-full h-full object-cover transform group-hover:scale-105 transition-all duration-300",
+                  "w-full h-full object-cover object-center transform group-hover:scale-105 transition-all duration-300",
                   !isImageLoaded && "opacity-0",
                   isImageLoaded && "opacity-100"
                 )}
@@ -73,13 +73,13 @@ export const CaseStudyCard = ({
               </div>
             </div>
           </div>
-          <h3 className="text-xl font-semibold mb-4 flex items-center justify-between">
+          <h3 className="text-xl font-semibold mb-4 min-h-[2.5rem] flex items-center justify-between">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80 group-hover:from-primary group-hover:to-primary/80 transition-all duration-300">
               {title}
             </span>
             <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
           </h3>
-          <p className="text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300 line-clamp-3">
+          <p className="text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300 line-clamp-3 min-h-[4.5rem]">
             {description}
           </p>
         </div>
