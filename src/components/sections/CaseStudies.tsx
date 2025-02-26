@@ -17,6 +17,17 @@ interface Project {
 const CaseStudies = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeCategory, setActiveCategory] = useState<"all" | Project["category"]>("all");
+  const [showAll, setShowAll] = useState(false);
+
+  // Function to determine how many projects to show based on screen size
+  const getInitialProjectCount = () => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth >= 1024) return 6; // lg screens
+      if (window.innerWidth >= 768) return 4; // md screens
+      return 3; // sm screens
+    }
+    return 6; // default
+  };
 
   const projects: Project[] = [
     // Landing Pages
@@ -112,6 +123,10 @@ const CaseStudies = () => {
     ? projects 
     : projects.filter(project => project.category === activeCategory);
 
+  const visibleProjects = showAll 
+    ? filteredProjects 
+    : filteredProjects.slice(0, getInitialProjectCount());
+
   return (
     <section id="cases" className="py-16">
       <div className="container mx-auto px-4">
@@ -156,7 +171,7 @@ const CaseStudies = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredProjects.map((project, index) => (
+          {visibleProjects.map((project, index) => (
             <CaseStudyCard
               key={index}
               title={project.title}
@@ -166,6 +181,24 @@ const CaseStudies = () => {
             />
           ))}
         </div>
+        
+        {filteredProjects.length > getInitialProjectCount() && (
+          <motion.div 
+            className="flex justify-center mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => setShowAll(!showAll)}
+              className="min-w-[200px]"
+            >
+              {showAll ? "Show Less" : `View All (${filteredProjects.length})`}
+            </Button>
+          </motion.div>
+        )}
       </div>
 
       <ProjectPreviewDialog

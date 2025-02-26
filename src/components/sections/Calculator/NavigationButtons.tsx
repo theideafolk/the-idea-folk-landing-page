@@ -26,7 +26,7 @@ export const NavigationButtons = ({
         variant="outline"
         className={cn(
           isMobile ? "w-10 h-10 rounded-full p-0" : "w-[120px]",
-          "bg-background/50"
+          "bg-background/50 text-white"
         )}
         onClick={onPrev}
         disabled={disablePrev}
@@ -40,7 +40,7 @@ export const NavigationButtons = ({
       <Button
         className={cn(
           isMobile ? "w-10 h-10 rounded-full p-0" : nextLabel === "Next" ? "w-[120px]" : "w-[200px]",
-          "bg-background/50"
+          "bg-background/50 text-white"
         )}
         onClick={onNext}
         disabled={disableNext}

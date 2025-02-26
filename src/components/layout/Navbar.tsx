@@ -20,7 +20,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "backdrop-blur-xl bg-background/30 border-b border-white/5 shadow-lg safe-area-padding" 
+          ? "backdrop-blur-xl bg-background/50 border-b border-border/30 shadow-lg safe-area-padding" 
           : "bg-transparent safe-area-padding"
       }`}
     >
@@ -76,7 +76,6 @@ const Navbar = () => {
             open={isCalculatorOpen}
             onOpenChange={setIsCalculatorOpen}
           />
-
 
           {/* Mobile Menu Button */}
           <button

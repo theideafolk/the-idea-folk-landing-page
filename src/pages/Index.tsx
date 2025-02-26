@@ -30,11 +30,11 @@ const Index = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
   return (
-    <div ref={containerRef} className="min-h-screen bg-background relative">
+    <div ref={containerRef} className="min-h-screen bg-background gradient-overlay relative">
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-grid-white/10" />
+        <div className="absolute inset-0 bg-grid-white/10 opacity-90" />
       </div>
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_var(--mouse-x)_var(--mouse-y),rgba(var(--primary-rgb),0.15),transparent_50%)]" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_var(--mouse-x)_var(--mouse-y),rgba(var(--primary-rgb),0.08),transparent_50%)]" />
       <Navbar />
       <main className="relative z-10">
         <Hero />

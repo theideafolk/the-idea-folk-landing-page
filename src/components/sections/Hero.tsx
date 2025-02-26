@@ -154,7 +154,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button 
                 size="lg"
-                className="w-full sm:w-auto px-8 text-lg relative overflow-hidden bg-primary text-background font-semibold hover:bg-primary/90"
+                className="w-full sm:w-auto px-8 text-lg relative overflow-hidden bg-primary text-white font-semibold hover:bg-primary/90"
                 onClick={() => {
                   const inquirySection = document.getElementById("inquiry");
                   inquirySection?.scrollIntoView({ behavior: "smooth" });
@@ -165,7 +165,7 @@ const Hero = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto px-8 text-lg opacity-80 hover:opacity-100"
+                className="w-full sm:w-auto px-8 text-lg opacity-80 hover:opacity-100 text-white"
                 onClick={() => setIsCalculatorOpen(true)}
               >
                 Calculate Cost

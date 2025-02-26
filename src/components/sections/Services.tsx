@@ -6,7 +6,7 @@ import { SciFiText } from "../animations/SciFiText";
 const ServiceCardAnimated = ({ title, price, features, isPopular = false, index = 0 }) => {
   return (
     <motion.div
-      className={`rounded-lg p-6 relative flex flex-col h-full ${isPopular ? 'border-2 border-primary' : 'border border-border'}`}
+      className={`rounded-lg p-6 relative flex flex-col h-full ${isPopular ? 'border-2 border-primary shadow-[0_0_30px_-10px_hsl(var(--primary))]' : 'border border-border'}`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -17,13 +17,14 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="relative inline-block px-3 py-1 text-sm text-foreground rounded-full mb-4 bg-transparent border border-primary overflow-hidden group"
+          className="absolute -top-3 -right-3 z-10"
         >
-          <div className="absolute inset-0 bg-primary/10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent animate-shimmer" />
-          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-          <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-r from-primary/50 via-transparent to-primary/50" />
-          <span className="relative z-10">Most Popular</span>
+          <div className="relative">
+            <div className="absolute inset-0 bg-primary/20 rounded-lg blur-xl"></div>
+            <div className="relative px-4 py-1 bg-primary text-primary-foreground rounded-lg font-medium shadow-lg border border-primary/20">
+              Most Popular
+            </div>
+          </div>
         </motion.span>
       )}
       <div className="flex flex-col h-full">
@@ -49,7 +50,7 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
           <Button
             className="w-full relative overflow-hidden group"
             variant="default"
-            className="w-full relative overflow-hidden group bg-primary text-background font-semibold hover:bg-primary/90"
+            className="w-full relative overflow-hidden group bg-primary text-white font-semibold hover:bg-primary/90"
             onClick={() => {
               const inquirySection = document.getElementById("inquiry");
               inquirySection?.scrollIntoView({ behavior: "smooth" });
