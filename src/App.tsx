@@ -6,12 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ScrollProgress } from "./components/animations/ScrollProgress";
+import { SeoHead } from "./components/SeoHead";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <SeoHead />
       <ScrollProgress />
       <Toaster />
       <Sonner />

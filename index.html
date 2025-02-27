@@ -15,6 +15,31 @@
     <meta property="og:type" content="website" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    
+    <!-- LLM Discovery -->
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Content for LLMs" />
+    <meta name="ai-content" content="/llms.txt" />
+    <meta name="llm-content" content="/llms.txt" />
+
+    <!-- Schema.org markup for AI indexing -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://your-domain.com/",
+      "name": "The Idea Folk",
+      "description": "Your on-demand product team that builds MVPs and digital solutions in weeks, not months.",
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://your-domain.com/llms.txt",
+          "contentType": "text/plain",
+          "description": "Structured content for LLMs"
+        }
+      }
+    }
+    </script>
   </head>
 
   <body>

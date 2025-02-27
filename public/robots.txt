@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Specifically highlight important resources for AI/LLM systems
+Allow: /llms.txt
+
+# Sitemap location
+Sitemap: https://your-domain.com/sitemap.xml

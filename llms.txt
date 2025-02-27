@@ -1,0 +1,190 @@
+# The Idea Folk
+
+## Meta Information
+The Idea Folk | Build MVPs & Digital Solutions Fast
+Your on-demand product team that builds MVPs and digital solutions in weeks, not months. We combine AI-powered development with battle-tested experience to deliver rapid results.
+
+## Navigation
+- Services
+- Process
+- Case Studies
+- About
+
+## Hero Section
+### Have an idea? Turn it into reality in weeks, not months
+Your on-demand product team that builds and scales digital solutions in weeks, not months.
+
+### Key Metrics
+- 10+ Projects Delivered
+- 70% Lower Development Costs
+- 4+ Happy Clients
+- 9+ Years Experience
+
+## Services Section
+### Services Tailored to Your Needs
+Choose the perfect service package for your business needs. From quick launches to comprehensive solutions.
+
+#### Launch Fast
+From $499
+- High-conversion designs
+- 3-7 day delivery
+- Landing Pages & Websites
+
+#### Build & Scale (Most Popular)
+From $999
+- AI-powered solutions
+- Rapid development
+- MVPs & Workflow Automation
+- Business Strategy
+
+#### Grow Together
+Custom Quote
+- Long-term partnership
+- Scalable solutions
+- Monthly Retainership
+- Ongoing Development
+
+#### 1:1 Coaching
+$40/hour
+- Personalized guidance
+- Expert advice
+- AI Implementation
+- Product Strategy
+
+## Process Section
+### From Idea to Reality in Weeks
+Our streamlined process ensures rapid development without compromising quality.
+
+#### Day 1: Strategy Sprint
+Understand your vision, define core features, plan execution.
+
+#### Week 1: Rapid Build
+Daily progress updates, regular demos, quick iterations.
+
+#### Week 2-3: Launch & Learn
+Full deployment, analytics setup, growth recommendations.
+
+## Case Studies Section
+### Our Work
+Explore our portfolio of successful projects across various industries.
+
+#### Project Categories
+- All Projects
+- Landing Pages
+- Templates
+- MVPs
+- In Progress
+
+#### Featured Projects
+##### WiseTutor
+A modern landing page for an innovative tutoring platform.
+
+##### DirectShelf
+E-commerce landing page with direct-to-consumer focus.
+
+##### Edtech Admissions
+Educational institution admissions portal.
+
+##### Edtech Events
+Event management platform for educational institution.
+
+##### Edtech Applications
+Application management system for students.
+
+##### Biom Landing Page
+Modern, eco-friendly product showcase template.
+
+##### E-commerce Boilerplate
+Ready-to-use e-commerce template with modern features.
+
+##### Luxury Travel Concierge
+High-end travel service template with booking features.
+
+##### Interactive Product Page
+Dynamic product showcase template with interactive elements.
+
+##### Sports Apparel MVP
+Fully functional MVP for sports apparel e-commerce.
+
+##### SmartNotes
+Intelligent note-taking platform (Work in Progress).
+
+##### School CRM Software
+Comprehensive school management system with advanced CRM features.
+
+## About Section
+### Meet the Team
+
+#### Krishna
+##### AI Strategy & Product Leadership
+An AI strategist and product leader with 9+ years of experience scaling products and teams at BYJU'S, a global EdTech leader. I've built and launched products across 6 countries, scaled teams from 45 to 300+ members, and consistently cut development time by 70% using AI.
+
+Now, I'm applying that expertise to help small businesses like yours harness the power of AI and automation. Whether you're looking to build an MVP, streamline your workflows, or develop a winning content strategy, I'm here to guide you every step of the way.
+
+#### Venkatesh Golisetti
+##### Client Relations & Financial Strategy
+I bridge the gap between innovative ideas and practical execution. At The Idea Folk, I lead client relationships and financial strategy—translating technical possibilities into business terms that matter. My strength lies in helping founders understand the true value of AI implementation while negotiating the right approach for their unique needs.
+
+With a background in scaling operations, I ensure our partnerships deliver not just technical solutions, but measurable business outcomes.
+
+## FAQ Section
+### Frequently Asked Questions
+Got questions? We've got answers. If you don't find what you're looking for, feel free to reach out.
+
+#### How do you build so fast?
+We combine cutting-edge AI tools with battle-tested product experience. No learning on your dime - we leverage our expertise to deliver rapid results.
+
+#### What if my project is complex?
+We'll be honest upfront. If it needs more time, we'll tell you. But most MVPs can be launched within the timeframe we've discussed.
+
+#### What's included in your services?
+Everything needed to test with real users. No hidden costs, no surprises.
+
+#### Do you offer other services beyond MVPs and landing pages?
+Yes, we also offer workflow automation, content strategy, strategic growth consulting, and 1:1 coaching.
+
+## Contact Section
+### Ready to Move Fast?
+Let's build something amazing together. Our team is ready to turn your idea into reality in weeks, not months.
+
+## Project Inquiry Information
+### What we need to know about your project
+
+#### Project Stage Options
+- I have an idea
+- I have validated my idea
+- I have a PRD
+- I have an MVP
+
+#### Service Types
+- Landing Page
+- MVP Development
+- Workflow Automation
+- 1:1 Coaching
+
+#### Project Complexity
+- 1-3 features/sections/steps/sessions
+- 4-6 features/sections/steps/sessions
+- 7-10 features/sections/steps/sessions
+- 10+ features/sections/steps/sessions
+
+#### Budget Ranges
+- $500 - $1,000
+- $1,000 - $5,000
+- $5,000 - $10,000
+- $10,000+
+
+#### Special Considerations
+- Social causes and NGOs: We offer flexible pricing based on your budget to support your cause
+
+## Footer
+### Quick Links
+- Services
+- Process
+- Case Studies
+- About
+
+### Contact
+Get in Touch
+
+© 2025 The Idea Folk. All rights reserved.

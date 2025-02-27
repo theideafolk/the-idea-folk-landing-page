@@ -1,11 +1,49 @@
 import { ArrowRight } from "lucide-react";
 import { SciFiText } from "../animations/SciFiText";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { motion } from "framer-motion";
 
-const ProcessStep = ({ step, title, description }: {
+interface ProcessStepProps {
   step: string;
   title: string;
   description: string;
-}) => {
+  isLast?: boolean;
+}
+
+const ProcessStep = ({ step, title, description, isLast = false }: ProcessStepProps) => {
+  const isMobile = useIsMobile();
+
+  // Mobile-friendly layout
+  if (isMobile) {
+    return (
+      <div className="relative mb-8">
+        {/* Step circle with number and connecting line */}
+        <div className="flex items-start">
+          <div className="relative">
+            {/* Connecting line except for last item */}
+            {!isLast && (
+              <div className="absolute left-1/2 top-8 bottom-0 w-0.5 bg-gradient-to-b from-primary/40 via-primary/20 to-transparent -translate-x-1/2 h-full"></div>
+            )}
+            
+            {/* Circle with number */}
+            <div className="relative z-10 w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+              <span className="text-white font-medium">{step}</span>
+            </div>
+          </div>
+          
+          {/* Title - moved next to the circle */}
+          <h3 className="text-xl font-semibold ml-4 pt-0.5 text-foreground">{title}</h3>
+        </div>
+        
+        {/* Description - placed below with proper indentation */}
+        <div className="pl-12 mt-2">
+          <p className="text-muted-foreground">{description}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop layout (original)
   return (
     <div className="flex flex-col md:flex-row items-start gap-4 relative">
       <div className="flex-none">
@@ -26,6 +64,7 @@ const ProcessStep = ({ step, title, description }: {
 };
 
 const Process = () => {
+  const isMobile = useIsMobile();
   const steps = [
     {
       step: "1",
@@ -55,10 +94,17 @@ const Process = () => {
         </p>
         <div className="max-w-3xl mx-auto">
           <div className="space-y-12 relative">
-            {/* Timeline connecting line - placed at the bottom layer */}
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary/40 via-primary/20 to-transparent z-0"></div>
+            {/* Timeline connecting line - for desktop only */}
+            {!isMobile && (
+              <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary/40 via-primary/20 to-transparent z-0"></div>
+            )}
+            
             {steps.map((step, index) => (
-              <ProcessStep key={index} {...step} />
+              <ProcessStep 
+                key={index} 
+                {...step} 
+                isLast={index === steps.length - 1} 
+              />
             ))}
           </div>
         </div>
