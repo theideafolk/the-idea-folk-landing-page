@@ -19,7 +19,7 @@ const About = () => {
       key2: "Led global math product launches at BYJU'S",
       key3: "Grew teams from 45 to 300+ members",
       key4: "Experienced in content, strategy, and operations",
-      linkedin: "https://linkedin.com/in/yourusername"
+      linkedin: "https://www.linkedin.com/in/krishna-goutham/"
     },
     {
       name: "Venkatesh Golisetti",
@@ -29,7 +29,7 @@ const About = () => {
       key1: "Managed and scaled 200+ member production team",
       key2: "Bridges the gap between tech and business needs",
       key3: "Client relationship specialist and finances",
-      linkedin: "https://linkedin.com/in/yourusername"
+      linkedin: "https://www.linkedin.com/in/venkatesh-golisetti/"
     }
   ];
   
@@ -77,8 +77,8 @@ const About = () => {
                   transition={{ delay: index * 0.1 }}
                 >
                   <div className="flex flex-col sm:flex-row">
-                    {/* Image section - 40% on desktop, full width on mobile */}
-                    <div className="w-full sm:w-2/5 bg-gradient-to-br from-white/10 to-primary/5">
+                    {/* Image section - 50% on desktop, full width on mobile */}
+                    <div className="w-full sm:w-1/2 bg-gradient-to-br from-white/10 to-primary/5">
                       {/* Full height image container */}
                       <div className="w-full h-full">
                         <img 
@@ -93,8 +93,8 @@ const About = () => {
                       </div>
                     </div>
                     
-                    {/* Content section - 60% on desktop, full width on mobile */}
-                    <div className="w-full sm:w-3/5 p-5">
+                    {/* Content section - 50% on desktop, full width on mobile */}
+                    <div className="w-full sm:w-1/2 p-5">
                       <div className="flex justify-between items-start">
                         <div>
                           <h3 className="text-xl font-bold text-foreground">{member.name}</h3>
