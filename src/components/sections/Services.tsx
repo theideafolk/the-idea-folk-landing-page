@@ -2,11 +2,19 @@ import { Check, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { SciFiText } from "../animations/SciFiText";
+import { cn } from "@/lib/utils";
 
 const ServiceCardAnimated = ({ title, price, features, isPopular = false, index = 0 }) => {
   return (
     <motion.div
-      className={`rounded-lg p-6 relative flex flex-col h-full ${isPopular ? 'border-2 border-primary shadow-[0_0_30px_-10px_hsl(var(--primary))]' : 'border border-border'}`}
+      className={cn(
+        `rounded-lg p-6 relative flex flex-col h-full bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-lg ${
+          isPopular 
+            ? 'border-2 border-primary/30 shadow-[0_8px_32px_-4px_rgba(var(--primary-rgb),0.2)] ring-1 ring-primary/20' 
+            : 'border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
+        }`,
+        "hover:translate-y-[-4px] transition-all duration-300"
+      )}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -20,8 +28,8 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
           className="absolute -top-3 -right-3 z-10"
         >
           <div className="relative">
-            <div className="absolute inset-0 bg-primary/20 rounded-lg blur-xl"></div>
-            <div className="relative px-4 py-1 bg-primary text-primary-foreground rounded-lg font-medium shadow-lg border border-primary/20">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-primary/20 rounded-lg blur-xl"></div>
+            <div className="relative px-4 py-1 bg-primary text-white rounded-lg font-medium shadow-lg border border-white/20">
               Most Popular
             </div>
           </div>
@@ -30,7 +38,7 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
       <div className="flex flex-col h-full">
         <h3 className="text-xl font-semibold mb-2 text-foreground relative z-10">{title}</h3>
         <div className="mb-4">
-          <span className="text-3xl font-bold text-primary relative z-10">{price}</span>
+          <span className="text-3xl font-bold metallic-blue relative z-10">{price}</span>
         </div>
         <ul className="space-y-3 flex-1">
           {features.map((feature, i) => (
@@ -50,7 +58,6 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
           <Button
             className="w-full relative overflow-hidden group"
             variant="default"
-            className="w-full relative overflow-hidden group bg-primary text-white font-semibold hover:bg-primary/90"
             onClick={() => {
               const inquirySection = document.getElementById("inquiry");
               inquirySection?.scrollIntoView({ behavior: "smooth" });
@@ -130,7 +137,7 @@ const Services = () => {
           viewport={{ once: true }}
           className="text-center relative"
         >
-          <Sparkles className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-6 h-6 text-primary" />
+          <Sparkles className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-6 h-6 text-primary [filter:drop-shadow(0_0_3px_rgba(var(--primary-rgb),0.7))] animate-pulse-glow" />
           <h2 className="text-3xl md:text-4xl font-bold mb-6 inline-block">
             <SciFiText text="Services Tailored to Your Needs" />
           </h2>

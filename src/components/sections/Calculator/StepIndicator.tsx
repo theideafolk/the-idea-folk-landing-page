@@ -5,7 +5,7 @@ interface StepIndicatorProps {
 
 export const StepIndicator = ({ currentStep, totalSteps }: StepIndicatorProps) => {
   return (
-    <div className="mb-6">
+    <div className="mb-6 relative z-10">
       <div className="flex items-center justify-between relative">
         <div className="absolute top-1/2 left-0 w-full h-0.5 bg-muted/20 -translate-y-1/2" />
         <div 
@@ -36,9 +36,9 @@ export const StepIndicator = ({ currentStep, totalSteps }: StepIndicatorProps) =
               }`}
             />
             <span className={`relative z-10 transition-colors duration-300 ${
-              i < currentStep ? "text-primary-foreground" :
-              i === currentStep ? "text-white" :
-              "text-white/60"
+              i < currentStep ? "text-white" :
+              i === currentStep ? "text-foreground" :
+              "text-foreground/60"
             }`}>
               {i}
             </span>

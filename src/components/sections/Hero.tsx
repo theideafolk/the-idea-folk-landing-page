@@ -21,7 +21,7 @@ const SparkleEffects = () => {
           ease: "easeInOut"
         }}
       >
-        <Sparkles className="w-8 h-8 text-primary [filter:_drop-shadow(0_0_15px_hsl(var(--primary)))]" />
+        <Sparkles className="w-8 h-8 text-primary [filter:drop-shadow(0_0_3px_rgba(var(--primary-rgb),0.7))] animate-pulse-glow" />
       </motion.div>
 
       {/* Bottom-left sparkle cluster */}
@@ -38,14 +38,14 @@ const SparkleEffects = () => {
           delay: 1
         }}
       >
-        <Sparkles className="w-6 h-6 text-primary [filter:_drop-shadow(0_0_15px_hsl(var(--primary)))]" />
+        <Sparkles className="w-6 h-6 text-primary [filter:drop-shadow(0_0_3px_rgba(var(--primary-rgb),0.7))] animate-pulse-glow" />
       </motion.div>
 
       {/* Floating particles */}
       {Array.from({ length: 10 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-primary/30 rounded-full"
+          className="absolute w-1 h-1 bg-primary/60 rounded-full"
           initial={{ 
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight 
@@ -116,20 +116,20 @@ const Hero = () => {
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="absolute -top-20 -left-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl" 
+            animate={{ scale: 1, opacity: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-primary/5 to-primary/3 rounded-full blur-3xl" 
           />
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="absolute -bottom-20 -right-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl" 
+            animate={{ scale: 1, opacity: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="absolute -bottom-20 -right-20 w-40 h-40 bg-gradient-to-l from-primary/5 to-primary/3 rounded-full blur-3xl" 
           />
           <h1 className="relative text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            <span className="text-foreground">Have an idea?</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700">Have an idea?</span>
             {" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary to-white/80 relative [text-shadow:_0_0_30px_hsl(var(--primary)_/_0.3)]">
+            <span className="metallic-blue relative [text-shadow:_0_0_10px_hsl(var(--primary)_/_0.2)]">
               Turn it into reality
             </span>
             {" "}
@@ -154,7 +154,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button 
                 size="lg"
-                className="w-full sm:w-auto px-8 text-lg relative overflow-hidden bg-primary text-white font-semibold hover:bg-primary/90"
+                className="w-full sm:w-auto px-8 text-lg relative overflow-hidden animate-pulse-glow"
                 onClick={() => {
                   const inquirySection = document.getElementById("inquiry");
                   inquirySection?.scrollIntoView({ behavior: "smooth" });
@@ -165,7 +165,7 @@ const Hero = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto px-8 text-lg opacity-80 hover:opacity-100 text-white"
+                className="w-full sm:w-auto px-8 text-lg opacity-80 hover:opacity-100"
                 onClick={() => setIsCalculatorOpen(true)}
               >
                 Calculate Cost
@@ -174,19 +174,19 @@ const Hero = () => {
             
             <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">10+</div>
+                <div className="text-3xl font-bold text-foreground mb-2">10+</div>
                 <div className="text-sm text-muted-foreground">Projects Delivered</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">70%</div>
+                <div className="text-3xl font-bold text-foreground mb-2">70%</div>
                 <div className="text-sm text-muted-foreground">Lower Development Costs</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">4+</div>
+                <div className="text-3xl font-bold text-foreground mb-2">4+</div>
                 <div className="text-sm text-muted-foreground">Happy Clients</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">9+</div>
+                <div className="text-3xl font-bold text-foreground mb-2">9+</div>
                 <div className="text-sm text-muted-foreground">Years Experience</div>
               </div>
             </div>

@@ -128,7 +128,7 @@ const CaseStudies = () => {
     : filteredProjects.slice(0, getInitialProjectCount());
 
   return (
-    <section id="cases" className="py-16">
+    <section id="cases" className="py-16 bg-gradient-to-b from-white/90 via-white/95 to-white/90 backdrop-blur-xl">
       <div className="container mx-auto px-4">
         <motion.h2 
           className="text-3xl md:text-4xl font-bold text-center mb-6"
@@ -139,7 +139,7 @@ const CaseStudies = () => {
           <SciFiText text="Our Work" />
         </motion.h2>
         <motion.p 
-          className="text-muted-foreground text-center max-w-2xl mx-auto mb-8"
+          className="text-gray-600 text-center max-w-2xl mx-auto mb-8 text-lg"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

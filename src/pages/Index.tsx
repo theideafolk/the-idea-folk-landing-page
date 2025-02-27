@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
@@ -30,11 +29,11 @@ const Index = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
   return (
-    <div ref={containerRef} className="min-h-screen bg-background gradient-overlay relative">
+    <div ref={containerRef} className="min-h-screen bg-background relative">
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-grid-white/10 opacity-90" />
+        <div className="absolute inset-0 bg-grid-white/5 opacity-50" />
       </div>
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_var(--mouse-x)_var(--mouse-y),rgba(var(--primary-rgb),0.08),transparent_50%)]" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_var(--mouse-x)_var(--mouse-y),rgba(var(--primary-rgb),0.05),transparent_40%)]" />
       <Navbar />
       <main className="relative z-10">
         <Hero />

@@ -7,42 +7,85 @@ import { motion } from "framer-motion";
 import { teamMembers, type TeamMember } from "@/config/team";
 
 const TeamMemberCard = ({ member }: { member: TeamMember }) => (
-  <div className="bg-card rounded-lg p-8 border border-border">
-    <div className="flex flex-col md:flex-row gap-8 items-center">
-      <div className="w-48 h-48 rounded-full bg-muted overflow-hidden">
-        {member.imageUrl ? (
-          <img 
-            src={member.imageUrl} 
-            alt={member.name} 
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="w-full h-full bg-primary/10 flex items-center justify-center text-primary">
-            <span className="text-lg font-medium">{member.initials}</span>
+  <div className="h-full">
+    <div className="h-full bg-white/80 backdrop-blur-xl rounded-xl overflow-hidden border border-white/30 shadow-[0_10px_30px_-5px_rgba(var(--primary-rgb),0.2)] transform transition-all hover:scale-[1.01] hover:shadow-[0_20px_40px_-5px_rgba(var(--primary-rgb),0.25)]">
+      {/* Glass effect overlays */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/10 pointer-events-none rounded-xl"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(var(--primary-rgb),0.1),transparent_70%)] pointer-events-none"></div>
+      <div className="absolute top-0 left-0 right-0 h-px bg-white/80 rounded-t-xl"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-primary/10 rounded-b-xl"></div>
+      
+      {/* Content */}
+      <div className="relative z-10 p-6 flex flex-col md:flex-row gap-6 h-full">
+        {/* Left column - Photo */}
+        <div className="flex-shrink-0 flex items-center justify-center md:justify-start">
+          <div className="relative w-32 h-32 md:w-40 md:h-40">
+            {/* Photo container with circular frame */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/80 to-white/40 p-1 shadow-[0_10px_25px_-5px_rgba(var(--primary-rgb),0.3)]">
+              <div className="relative w-full h-full rounded-full overflow-hidden">
+                {/* Loading pulse animation */}
+                <div className="absolute inset-0 bg-primary/5 animate-pulse"></div>
+                
+                {/* Photo */}
+                {member.imageUrl ? (
+                  <img 
+                    src={member.imageUrl} 
+                    alt={member.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover rounded-full"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-primary/10 flex items-center justify-center text-primary">
+                    <span className="text-2xl font-medium">{member.initials}</span>
+                  </div>
+                )}
+                
+                {/* Inner glow effect */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/10 to-transparent opacity-60 pointer-events-none"></div>
+              </div>
+            </div>
+            
+            {/* Outer glow effect */}
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transform scale-105 blur-md transition-opacity"></div>
           </div>
-        )}
-      </div>
-      <div className="flex-1 text-center md:text-left">
-        <h3 className="text-2xl font-semibold mb-2 text-foreground">{member.name}</h3>
-        {member.role && (
-          <p className="text-primary mb-4">{member.role}</p>
-        )}
-        <p className="text-muted-foreground whitespace-pre-wrap">{member.description}</p>
-        {member.socialLinks && (
-          <div className="flex gap-4 mt-4 justify-center md:justify-start">
-            {Object.entries(member.socialLinks).map(([platform, url]) => (
-              <a
-                key={platform}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                {platform}
-              </a>
-            ))}
+        </div>
+        
+        {/* Right column - Text content */}
+        <div className="flex-1 flex flex-col space-y-3 text-left">
+          {/* Name and Role Section */}
+          <div className="space-y-1">
+            <h3 className="text-2xl font-semibold text-foreground">{member.name}</h3>
+            {member.role && (
+              <p className="text-primary font-medium">{member.role}</p>
+            )}
           </div>
-        )}
+          
+          {/* Bio Section */}
+          <div className="flex-1">
+            <p className="text-muted-foreground leading-relaxed">{member.description}</p>
+          </div>
+          
+          {/* Social Links (if any) */}
+          {member.socialLinks && (
+            <div className="flex gap-4 pt-2">
+              {Object.entries(member.socialLinks).map(([platform, url]) => (
+                <a
+                  key={platform}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {platform}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   </div>
@@ -72,71 +115,63 @@ const About = () => {
   }, [emblaApi, onSelect]);
 
   return (
-    <section id="about" className="py-16">
+    <section id="about" className="py-16 bg-gradient-to-b from-white/90 via-white/95 to-white/90 backdrop-blur-xl">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
           <SciFiText text="Meet the Team" />
         </h2>
-        <div className="max-w-4xl mx-auto relative">
-          {/* Carousel Container */}
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex">
-              {teamMembers.map((member, index) => (
-                <motion.div 
-                  key={member.name}
-                  className="flex-[0_0_100%] min-w-0 px-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                >
-                  <TeamMemberCard member={member} />
-                </motion.div>
-              ))}
+        
+        <div className="max-w-4xl mx-auto">
+          {/* Card Carousel Container */}
+          <div className="relative">
+            <div className="overflow-hidden rounded-xl" ref={emblaRef}>
+              <div className="flex">
+                {teamMembers.map((member) => (
+                  <div key={member.name} className="flex-[0_0_100%] min-w-0 h-[400px] px-1 group">
+                    <TeamMemberCard member={member} />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-
-          {/* Navigation Buttons */}
-          <div className="flex justify-center items-center gap-4 mt-8">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={scrollPrev}
-              disabled={!prevBtnEnabled}
-              className="rounded-full"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
             
-            {/* Dots */}
-            <div className="flex gap-2">
+            {/* Navigation Controls */}
+            <div className="absolute -inset-x-12 top-1/2 -translate-y-1/2 flex items-center justify-between pointer-events-none">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={scrollPrev}
+                disabled={!prevBtnEnabled}
+                className="pointer-events-auto h-12 w-12 rounded-full bg-white/70 backdrop-blur-md shadow-lg hover:bg-white/90 transition-all border border-white/50"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={scrollNext}
+                disabled={!nextBtnEnabled}
+                className="pointer-events-auto h-12 w-12 rounded-full bg-white/70 backdrop-blur-md shadow-lg hover:bg-white/90 transition-all border border-white/50"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </Button>
+            </div>
+            
+            {/* Progress Indicators */}
+            <div className="mt-8 flex justify-center gap-2">
               {teamMembers.map((_, index) => (
                 <button
                   key={index}
                   className={`w-2 h-2 rounded-full transition-all ${
                     index === selectedIndex 
-                      ? "bg-primary w-4" 
-                      : "bg-primary/20"
+                      ? "bg-primary w-8 shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" 
+                      : "bg-primary/20 hover:bg-primary/40"
                   }`}
                   onClick={() => emblaApi?.scrollTo(index)}
+                  aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
             </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={scrollNext}
-              disabled={!nextBtnEnabled}
-              className="rounded-full"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
-
-          {/* Progress Indicators */}
-          <div className="absolute -inset-x-12 top-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="absolute left-0 w-12 h-full bg-gradient-to-r from-background to-transparent" />
-            <div className="absolute right-0 w-12 h-full bg-gradient-to-l from-background to-transparent" />
           </div>
         </div>
       </div>

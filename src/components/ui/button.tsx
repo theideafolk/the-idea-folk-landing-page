@@ -10,14 +10,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+<<<<<<< Updated upstream
         default: "bg-primary/90 border border-primary/20 text-white hover:bg-primary relative overflow-hidden backdrop-blur-sm [box-shadow:_0_0_30px_-10px_hsl(var(--primary))]",
+=======
+        default: "bg-primary text-white border border-primary/10 hover:bg-primary/90 relative overflow-hidden backdrop-blur-sm premium-blue-shadow",
+>>>>>>> Stashed changes
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "bg-transparent border border-border hover:border-primary text-white hover:bg-primary/10 relative overflow-hidden backdrop-blur-sm",
+          "bg-white/70 border border-border hover:border-primary text-foreground hover:bg-primary/5 relative overflow-hidden backdrop-blur-sm premium-shadow",
         secondary:
-          "bg-transparent border border-primary text-white hover:border-primary relative overflow-hidden",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+          "bg-white/70 border border-primary/20 text-foreground hover:border-primary/40 relative overflow-hidden premium-shadow",
+        ghost: "hover:bg-accent/50 hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
@@ -49,12 +53,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        <div className="absolute inset-0 bg-primary/10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent animate-shimmer" />
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-        <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-r from-primary/50 via-transparent to-primary/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/3 to-transparent animate-shimmer" />
+        <div className="absolute inset-0 shadow-inner" />
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-white/30 via-white/50 to-white/30" />
+        <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20" />
         <ButtonEffect />
+<<<<<<< Updated upstream
         <span className="relative z-10">{props.children}</span>
+=======
+        <span className="relative z-10 font-medium">{props.children}</span>
+>>>>>>> Stashed changes
       </Comp>
     )
   }

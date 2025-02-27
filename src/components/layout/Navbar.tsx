@@ -20,8 +20,8 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "backdrop-blur-xl bg-background/50 border-b border-border/30 shadow-lg safe-area-padding" 
-          : "bg-transparent safe-area-padding"
+          ? "backdrop-blur-xl bg-background/80 border-b border-border/30 shadow-lg" 
+          : "bg-transparent"
       }`}
     >
       <div className="container">
@@ -93,6 +93,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
+<<<<<<< Updated upstream
           <div className="md:hidden backdrop-blur-xl bg-background/30 border-b border-white/5 absolute top-16 left-0 right-0 p-4">
             <div className="flex flex-col space-y-4 safe-area-padding">
               <a
@@ -146,6 +147,67 @@ const Navbar = () => {
                   </Button>
                 </div>
               )}
+=======
+          <>
+            {/* Blurred overlay */}
+            <div className="fixed inset-0 top-16 bg-black/60 backdrop-blur-sm z-40" onClick={() => setIsMenuOpen(false)} />
+            
+            {/* Menu content */}
+            <div className="md:hidden absolute top-16 left-0 right-0 z-50 p-4">
+              <div className="flex flex-col space-y-4 bg-background p-6 rounded-lg border border-border shadow-2xl">
+                <a
+                  href="#services"
+                  className="text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Services
+                </a>
+                <a
+                  href="#process"
+                  className="text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Process
+                </a>
+                <a
+                  href="#cases"
+                  className="text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Case Studies
+                </a>
+                <a
+                  href="#about"
+                  className="text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  About
+                </a>
+                {isScrolled && (
+                  <div className="flex flex-col gap-4 pt-4">
+                    <Button 
+                      variant="outline"
+                      onClick={() => {
+                        setIsCalculatorOpen(true);
+                        setIsMenuOpen(false);
+                      }}
+                      className="opacity-80 hover:opacity-100"
+                    >
+                      Get Estimate
+                    </Button>
+                    <Button 
+                      onClick={() => {
+                        const inquirySection = document.getElementById("inquiry");
+                        inquirySection?.scrollIntoView({ behavior: "smooth" });
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      Start Building
+                    </Button>
+                  </div>
+                )}
+              </div>
+>>>>>>> Stashed changes
             </div>
           </div>
         )}

@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 210 40% 2%; /* Rich dark blue-gray */
-    --foreground: 210 40% 98%; /* Clean white */
-    --card: 210 40% 4%; /* Slightly lighter background */
-    --card-foreground: 0 0% 98%; /* Off-white */
-    --popover: 210 40% 4%; /* Matches card */
-    --popover-foreground: 0 0% 98%; /* Off-white */
-    --primary: 217 91% 60%; /* Softer blue */
-    --primary-rgb: 37, 99, 235; /* Softer blue in RGB */
-    --primary-foreground: 0 0% 98%; /* Off-white */
-    --secondary: 210 40% 8%; /* Subtle accent background */
-    --secondary-foreground: 0 0% 98%; /* Off-white */
-    --muted: 210 40% 8%; /* Subtle background */
-    --muted-foreground: 210 40% 70%; /* Softer text */
-    --accent: 217 91% 10%; /* Subtle blue accent */
-    --accent-foreground: 0 0% 98%; /* Off-white */
+    --background: 0 0% 100%; /* Pure white base */
+    --foreground: 222.2 84% 4.9%; /* Rich dark text */
+    --card: 0 0% 100%; /* White card background */
+    --card-foreground: 222.2 84% 4.9%; /* Dark text on cards */
+    --popover: 0 0% 100%; /* White popover background */
+    --popover-foreground: 222.2 84% 4.9%; /* Dark text on popovers */
+    --primary: 217 97% 57%; /* Darker blue - #2472fc */
+    --primary-rgb: 36, 114, 252; /* Darker blue in RGB */
+    --primary-foreground: 210 40% 98%; /* White text on primary */
+    --secondary: 210 40% 96.1%; /* Light gray background */
+    --secondary-foreground: 222.2 47.4% 11.2%; /* Dark text on secondary */
+    --muted: 210 40% 96.1%; /* Light muted background */
+    --muted-foreground: 215.4 16.3% 46.9%; /* Muted text */
+    --accent: 210 40% 96.1%; /* Light accent background */
+    --accent-foreground: 222.2 47.4% 11.2%; /* Dark text on accent */
     --destructive: 0 84.2% 60.2%; /* Red */
-    --destructive-foreground: 0 0% 98%; /* Off-white */
-    --border: 210 40% 15%; /* Subtle borders */
-    --input: 210 40% 15%; /* Matches border */
-    --ring: 217 91% 60%; /* Matches primary */
+    --destructive-foreground: 210 40% 98%; /* White text on destructive */
+    --border: 214.3 31.8% 91.4%; /* Light border color */
+    --input: 214.3 31.8% 91.4%; /* Light input border */
+    --ring: 217 97% 57%; /* Matches primary */
     --radius: 0.75rem;
   }
 
@@ -189,7 +189,70 @@
   .gradient-overlay {
     background: radial-gradient(
       circle at center,
-      hsl(var(--background)) 0%,
-      hsl(210 40% 1%) 100%
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.7) 100%
     );
+<<<<<<< Updated upstream
+=======
+    backdrop-filter: blur(8px);
+  }
+
+  /* Glass effect for cards and containers */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.05),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Soft blue glow for premium elements */
+  .soft-blue-glow {
+    filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.5));
+  }
+
+  /* Metallic blue effect */
+  .metallic-blue {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)) 40%, hsl(217, 97%, 65%) 50%, hsl(var(--primary)) 60%, hsl(var(--primary)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 1px rgba(var(--primary-rgb), 0.1);
+  }
+
+  /* Premium shadows */
+  .premium-shadow {
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 2px 4px -1px rgba(0, 0, 0, 0.03),
+      0 0 0 1px rgba(255, 255, 255, 0.3);
+  }
+
+  /* Premium blue shadows */
+  .premium-blue-shadow {
+    box-shadow:
+      0 4px 12px -2px rgba(var(--primary-rgb), 0.15),
+      0 2px 6px -1px rgba(var(--primary-rgb), 0.1);
+  }
+
+  /* Animated subtle glow for interactive elements */
+  @keyframes pulse-glow {
+    0%, 100% { filter: drop-shadow(0 0 3px rgba(var(--primary-rgb), 0.4)); }
+    50% { filter: drop-shadow(0 0 6px rgba(var(--primary-rgb), 0.6)); }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+>>>>>>> Stashed changes
   }

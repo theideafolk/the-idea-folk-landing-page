@@ -62,17 +62,17 @@ const InquiryForm = () => {
   };
 
   return (
-    <section id="inquiry" className="py-16">
+    <section id="inquiry" className="py-16 bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-xl">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
             <SciFiText text="Let's Build Something Amazing" />
           </h2>
-          <p className="text-muted-foreground text-center mb-12">
+          <p className="text-gray-600 text-center mb-12 text-lg">
             Tell us about your project and we'll get back to you within 24 hours.
           </p>
 
-          <div className="bg-card rounded-lg p-8 border border-border">
+          <div className="bg-gradient-to-b from-white/90 to-white/80 backdrop-blur-xl rounded-xl p-8 border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
             <div className="space-y-6">
               <div className="space-y-2">
                 <Label>Your Name</Label>
