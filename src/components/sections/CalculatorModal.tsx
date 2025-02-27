@@ -15,12 +15,6 @@ interface CalculatorModalProps {
 export const CalculatorModal = ({ open, onOpenChange }: CalculatorModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-<<<<<<< Updated upstream
-      <DialogContent className="max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center">
-            Project Cost Calculator
-=======
       <DialogContent className="max-w-lg bg-white/95 backdrop-blur-xl border border-primary/20 overflow-visible p-6 shadow-[0_10px_40px_-5px_rgba(var(--primary-rgb),0.25)]">
         {/* Glass overlay effect */}
         <div className="absolute inset-0 bg-white/40 backdrop-blur-md rounded-lg pointer-events-none border border-white/50" />
@@ -39,7 +33,6 @@ export const CalculatorModal = ({ open, onOpenChange }: CalculatorModalProps) =>
         <DialogHeader className="relative z-10">
           <DialogTitle className="text-2xl font-bold text-center mb-6 text-foreground">
             Project Cost Estimate
->>>>>>> Stashed changes
           </DialogTitle>
         </DialogHeader>
         <Calculator />

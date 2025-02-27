@@ -192,8 +192,6 @@
       rgba(255, 255, 255, 0.9) 0%,
       rgba(255, 255, 255, 0.7) 100%
     );
-<<<<<<< Updated upstream
-=======
     backdrop-filter: blur(8px);
   }
 
@@ -214,7 +212,7 @@
 
   /* Metallic blue effect */
   .metallic-blue {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)) 40%, hsl(217, 97%, 65%) 50%, hsl(var(--primary)) 60%, hsl(var(--primary)) 100%);
+    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)) 40%, hsl(217, 97%, 65%) 50%, hsl(var(--primary)) 60%, hsl(var(--primary)) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -254,5 +252,4 @@
   
   .no-scrollbar::-webkit-scrollbar {
     display: none;  /* Chrome, Safari and Opera */
->>>>>>> Stashed changes
   }

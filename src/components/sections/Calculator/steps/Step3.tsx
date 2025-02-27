@@ -38,7 +38,7 @@ export const Step3 = ({ projectDetails, setProjectDetails, estimatedBudget, onNe
         isNGO={projectDetails.isNGO}
         serviceType={projectDetails.serviceType}
       />
-      <div className="h-16" /> {/* Spacer for navigation buttons */}
+      <div className="h-16" />
       <NavigationButtons
         onPrev={onPrev}
         onNext={onNext}

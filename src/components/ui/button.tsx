@@ -10,11 +10,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-<<<<<<< Updated upstream
-        default: "bg-primary/90 border border-primary/20 text-white hover:bg-primary relative overflow-hidden backdrop-blur-sm [box-shadow:_0_0_30px_-10px_hsl(var(--primary))]",
-=======
         default: "bg-primary text-white border border-primary/10 hover:bg-primary/90 relative overflow-hidden backdrop-blur-sm premium-blue-shadow",
->>>>>>> Stashed changes
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -59,11 +55,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-white/30 via-white/50 to-white/30" />
         <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20" />
         <ButtonEffect />
-<<<<<<< Updated upstream
-        <span className="relative z-10">{props.children}</span>
-=======
         <span className="relative z-10 font-medium">{props.children}</span>
->>>>>>> Stashed changes
       </Comp>
     )
   }

@@ -168,7 +168,7 @@ const Hero = () => {
                 className="w-full sm:w-auto px-8 text-lg opacity-80 hover:opacity-100"
                 onClick={() => setIsCalculatorOpen(true)}
               >
-                Calculate Cost
+                Get Estimate
               </Button>
             </div>
             

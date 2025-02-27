@@ -56,7 +56,7 @@ const Navbar = () => {
                   onClick={() => setIsCalculatorOpen(true)}
                   className="text-sm"
                 >
-                  Calculate Cost
+                  Get Estimate
                 </Button>
                 <Button 
                   size="sm"
@@ -93,61 +93,6 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-<<<<<<< Updated upstream
-          <div className="md:hidden backdrop-blur-xl bg-background/30 border-b border-white/5 absolute top-16 left-0 right-0 p-4">
-            <div className="flex flex-col space-y-4 safe-area-padding">
-              <a
-                href="#services"
-                className="text-foreground hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Services
-              </a>
-              <a
-                href="#process"
-                className="text-foreground hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Process
-              </a>
-              <a
-                href="#cases"
-                className="text-foreground hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Case Studies
-              </a>
-              <a
-                href="#about"
-                className="text-foreground hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </a>
-              {isScrolled && (
-                <div className="flex flex-col gap-4 pt-4">
-                  <Button 
-                    variant="outline"
-                    onClick={() => {
-                      setIsCalculatorOpen(true);
-                      setIsMenuOpen(false);
-                    }}
-                    className="opacity-80 hover:opacity-100"
-                  >
-                    Calculate Cost
-                  </Button>
-                  <Button 
-                    onClick={() => {
-                      const inquirySection = document.getElementById("inquiry");
-                      inquirySection?.scrollIntoView({ behavior: "smooth" });
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Start Building
-                  </Button>
-                </div>
-              )}
-=======
           <>
             {/* Blurred overlay */}
             <div className="fixed inset-0 top-16 bg-black/60 backdrop-blur-sm z-40" onClick={() => setIsMenuOpen(false)} />
@@ -207,9 +152,8 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
->>>>>>> Stashed changes
             </div>
-          </div>
+          </>
         )}
       </div>
     </nav>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import ProjectPreviewDialog from "./ProjectPreviewDialog";
 import { SciFiText } from "../animations/SciFiText";
+import { cn } from "@/lib/utils";
 import { CaseStudyCard } from "./CaseStudies/CaseStudyCard";
 import { motion } from "framer-motion";
 
@@ -149,7 +150,7 @@ const CaseStudies = () => {
         </motion.p>
 
         <motion.div 
-          className="flex justify-center gap-4 mb-8"
+          className="flex justify-start md:justify-center gap-2 md:gap-4 mb-8 overflow-x-auto pb-4 px-4 md:px-0 -mx-4 md:mx-0 no-scrollbar"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -160,7 +161,12 @@ const CaseStudies = () => {
               key={category}
               variant={activeCategory === category ? "default" : "outline"}
               onClick={() => setActiveCategory(category as typeof activeCategory)}
-              className="capitalize"
+              className={cn(
+                "capitalize whitespace-nowrap",
+                "h-12 px-6 text-base font-medium",
+                "md:h-10 md:px-4 md:text-sm",
+                "flex-shrink-0"
+              )}
             >
               {category === "all" ? "All Projects" : 
                category === "mvp" ? "MVPs" : 

@@ -90,7 +90,7 @@ const Calculator = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative pb-16">
       <StepIndicator currentStep={step} totalSteps={3} />
       {renderStep()}
     </div>
