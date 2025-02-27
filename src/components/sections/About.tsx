@@ -16,10 +16,10 @@ const TeamMemberCard = ({ member }: { member: TeamMember }) => (
       <div className="absolute bottom-0 left-0 right-0 h-px bg-primary/10 rounded-b-xl"></div>
       
       {/* Content */}
-      <div className="relative z-10 p-6 flex flex-col md:flex-row gap-6 h-full">
+      <div className="relative z-10 p-6 flex flex-col md:flex-row gap-6 h-full overflow-y-auto">
         {/* Left column - Photo */}
         <div className="flex-shrink-0 flex items-center justify-center md:justify-start">
-          <div className="relative w-32 h-32 md:w-40 md:h-40">
+          <div className="relative w-28 h-28 md:w-40 md:h-40">
             {/* Photo container with circular frame */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/80 to-white/40 p-1 shadow-[0_10px_25px_-5px_rgba(var(--primary-rgb),0.3)]">
               <div className="relative w-full h-full rounded-full overflow-hidden">
@@ -58,15 +58,15 @@ const TeamMemberCard = ({ member }: { member: TeamMember }) => (
         <div className="flex-1 flex flex-col space-y-3 text-left">
           {/* Name and Role Section */}
           <div className="space-y-1">
-            <h3 className="text-2xl font-semibold text-foreground">{member.name}</h3>
+            <h3 className="text-xl md:text-2xl font-semibold text-foreground">{member.name}</h3>
             {member.role && (
-              <p className="text-primary font-medium">{member.role}</p>
+              <p className="text-primary font-medium text-sm md:text-base">{member.role}</p>
             )}
           </div>
           
           {/* Bio Section */}
-          <div className="flex-1">
-            <p className="text-muted-foreground leading-relaxed">{member.description}</p>
+          <div className="flex-1 overflow-y-auto max-h-[200px] md:max-h-none">
+            <p className="text-muted-foreground leading-relaxed text-sm md:text-base">{member.description}</p>
           </div>
           
           {/* Social Links (if any) */}
@@ -127,7 +127,7 @@ const About = () => {
             <div className="overflow-hidden rounded-xl" ref={emblaRef}>
               <div className="flex">
                 {teamMembers.map((member) => (
-                  <div key={member.name} className="flex-[0_0_100%] min-w-0 h-[400px] px-1 group">
+                  <div key={member.name} className="flex-[0_0_100%] min-w-0 px-1 group h-[400px] sm:h-[450px] md:h-[500px]">
                     <TeamMemberCard member={member} />
                   </div>
                 ))}
@@ -135,15 +135,15 @@ const About = () => {
             </div>
             
             {/* Navigation Controls */}
-            <div className="absolute -inset-x-12 top-1/2 -translate-y-1/2 flex items-center justify-between pointer-events-none">
+            <div className="absolute inset-x-0 md:-inset-x-12 top-1/2 -translate-y-1/2 flex items-center justify-between pointer-events-none px-3 md:px-0">
               <Button
                 variant="outline"
                 size="icon"
                 onClick={scrollPrev}
                 disabled={!prevBtnEnabled}
-                className="pointer-events-auto h-12 w-12 rounded-full bg-white/70 backdrop-blur-md shadow-lg hover:bg-white/90 transition-all border border-white/50"
+                className="pointer-events-auto h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/70 backdrop-blur-md shadow-lg border border-white/50 flex items-center justify-center hover:bg-white"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
               
               <Button
@@ -151,9 +151,9 @@ const About = () => {
                 size="icon"
                 onClick={scrollNext}
                 disabled={!nextBtnEnabled}
-                className="pointer-events-auto h-12 w-12 rounded-full bg-white/70 backdrop-blur-md shadow-lg hover:bg-white/90 transition-all border border-white/50"
+                className="pointer-events-auto h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/70 backdrop-blur-md shadow-lg border border-white/50 flex items-center justify-center hover:bg-white"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
             </div>
             

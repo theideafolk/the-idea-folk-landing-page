@@ -4,13 +4,16 @@ import { Button } from "../ui/button";
 import { SciFiText } from "../animations/SciFiText";
 import { useEffect, useRef, useState } from "react";
 import { CalculatorModal } from "./CalculatorModal";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const SparkleEffects = () => {
+  const isMobile = useIsMobile();
+  
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Top-right sparkle cluster */}
+      {/* Top-right sparkle cluster - positioned to avoid text overlap on mobile */}
       <motion.div 
-        className="absolute top-[15%] right-[15%]"
+        className={`absolute ${isMobile ? 'top-[5%] right-[10%]' : 'top-[15%] right-[15%]'}`}
         animate={{
           scale: [1, 1.2, 1],
           rotate: [0, 15, -15, 0],
@@ -21,12 +24,12 @@ const SparkleEffects = () => {
           ease: "easeInOut"
         }}
       >
-        <Sparkles className="w-8 h-8 text-primary [filter:drop-shadow(0_0_3px_rgba(var(--primary-rgb),0.7))] animate-pulse-glow" />
+        <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-primary [filter:drop-shadow(0_0_3px_rgba(var(--primary-rgb),0.7))] animate-pulse-glow" />
       </motion.div>
 
-      {/* Bottom-left sparkle cluster */}
+      {/* Bottom-left sparkle cluster - positioned to avoid text overlap on mobile */}
       <motion.div 
-        className="absolute bottom-[25%] left-[20%]"
+        className={`absolute ${isMobile ? 'bottom-[40%] left-[5%]' : 'bottom-[25%] left-[20%]'}`}
         animate={{
           scale: [1.2, 1, 1.2],
           rotate: [-15, 0, 15, -15],
@@ -38,30 +41,50 @@ const SparkleEffects = () => {
           delay: 1
         }}
       >
-        <Sparkles className="w-6 h-6 text-primary [filter:drop-shadow(0_0_3px_rgba(var(--primary-rgb),0.7))] animate-pulse-glow" />
+        <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-primary [filter:drop-shadow(0_0_3px_rgba(var(--primary-rgb),0.7))] animate-pulse-glow" />
       </motion.div>
 
-      {/* Floating particles */}
-      {Array.from({ length: 10 }).map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-primary/60 rounded-full"
-          initial={{ 
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight 
-          }}
-          animate={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: Math.random() * 5 + 5,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      ))}
+      {/* Floating particles - reduced for mobile and positioned to avoid text */}
+      {Array.from({ length: isMobile ? 5 : 10 }).map((_, i) => {
+        // For mobile, keep particles to the edges
+        const mobileX = i % 2 === 0 ? 
+          Math.random() * window.innerWidth * 0.2 : // Left 20%
+          window.innerWidth * 0.8 + Math.random() * window.innerWidth * 0.2; // Right 20%
+          
+        const mobileY = Math.random() * window.innerHeight;
+        
+        // For desktop, allow particles throughout
+        const desktopX = Math.random() * window.innerWidth;
+        const desktopY = Math.random() * window.innerHeight;
+          
+        return (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-primary/60 rounded-full"
+            initial={{ 
+              x: isMobile ? mobileX : desktopX,
+              y: isMobile ? mobileY : desktopY 
+            }}
+            animate={{
+              x: isMobile ? 
+                (i % 2 === 0 ? 
+                  [mobileX, mobileX + window.innerWidth * 0.1, mobileX] : 
+                  [mobileX, mobileX - window.innerWidth * 0.1, mobileX]) : 
+                [desktopX, desktopX + 100, desktopX - 100, desktopX],
+              y: isMobile ?
+                [mobileY, mobileY + 50, mobileY - 50, mobileY] :
+                [desktopY, desktopY - 100, desktopY + 100, desktopY],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.7, 0.3]
+            }}
+            transition={{
+              duration: Math.random() * 5 + 5,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        );
+      })}
     </div>
   );
 };
@@ -87,6 +110,7 @@ const TextReveal = ({ children, delay = 0 }) => {
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {

@@ -28,13 +28,13 @@ export const NavigationButtons = ({
       
       {isMobile ? (
         <Button
-          variant="ghost"
-          size="icon"
-          className="relative z-10 text-foreground/70 hover:text-foreground"
+          variant="outline"
+          size="lg"
+          className="relative z-10 text-foreground/70 hover:text-foreground w-12 h-12 rounded-full flex items-center justify-center shadow-md border border-primary/20"
           onClick={onPrev}
           disabled={disablePrev}
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-5 w-5" />
         </Button>
       ) : (
         <Button
@@ -49,13 +49,13 @@ export const NavigationButtons = ({
 
       {isMobile ? (
         <Button
-          variant="ghost"
-          size="icon" 
-          className="relative z-10 text-foreground hover:text-foreground"
+          variant="default"
+          size="lg" 
+          className="relative z-10 text-foreground hover:text-foreground w-12 h-12 rounded-full flex items-center justify-center shadow-md"
           onClick={onNext}
           disabled={disableNext}
         >
-          <ArrowRight className="h-4 w-4" />
+          <ArrowRight className="h-5 w-5" />
         </Button>
       ) : (
         <Button
