@@ -3,8 +3,10 @@ import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { SciFiText } from "../animations/SciFiText";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { ProjectInquiryModal } from "./ProjectInquiryModal";
 
-const ServiceCardAnimated = ({ title, price, features, isPopular = false, index = 0 }) => {
+const ServiceCardAnimated = ({ title, price, features, isPopular = false, index = 0, onActionClick }) => {
   return (
     <motion.div
       className={cn(
@@ -58,10 +60,7 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
           <Button
             className="w-full relative overflow-hidden group"
             variant="default"
-            onClick={() => {
-              const inquirySection = document.getElementById("inquiry");
-              inquirySection?.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={onActionClick}
           >
             Start Building
           </Button>
@@ -80,6 +79,11 @@ const ServiceCardAnimated = ({ title, price, features, isPopular = false, index 
 };
 
 const Services = () => {
+  const [inquiryModal, setInquiryModal] = useState({
+    open: false,
+    mode: "project" as "estimate" | "project"
+  });
+
   const services = [
     {
       title: "Launch Fast",
@@ -123,6 +127,10 @@ const Services = () => {
     },
   ];
 
+  const handleOpenModal = () => {
+    setInquiryModal({ open: true, mode: "project" });
+  };
+
   return (
     <section id="services" className="py-16">
       <motion.div 
@@ -159,10 +167,21 @@ const Services = () => {
           transition={{ delay: 0.2 }}
         >
           {services.map((service, index) => (
-            <ServiceCardAnimated key={index} {...service} index={index} />
+            <ServiceCardAnimated 
+              key={index} 
+              {...service} 
+              index={index} 
+              onActionClick={handleOpenModal}
+            />
           ))}
         </motion.div>
       </motion.div>
+
+      <ProjectInquiryModal
+        open={inquiryModal.open}
+        onOpenChange={(open) => setInquiryModal({ ...inquiryModal, open })}
+        initialMode={inquiryModal.mode}
+      />
     </section>
   );
 };

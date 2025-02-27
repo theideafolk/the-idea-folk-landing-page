@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
-import { CalculatorModal } from "../sections/CalculatorModal"; 
+import { ProjectInquiryModal } from "../sections/ProjectInquiryModal";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
+  const [inquiryModal, setInquiryModal] = useState({
+    open: false,
+    mode: "project" as "estimate" | "project"
+  });
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,10 +21,17 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Always solid background on mobile/tablet, or when scrolled on any device
+  const shouldShowBackground = isMobile || isScrolled;
+
+  const handleOpenModal = (mode: "estimate" | "project") => {
+    setInquiryModal({ open: true, mode });
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
+        shouldShowBackground 
           ? "backdrop-blur-xl bg-background/80 border-b border-border/30 shadow-lg" 
           : "bg-transparent"
       }`}
@@ -48,22 +60,19 @@ const Navbar = () => {
             <a href="#about" className="text-foreground hover:text-primary transition-colors">
               About
             </a>
-            {isScrolled && (
+            {shouldShowBackground && (
               <div className="flex items-center gap-4">
                 <Button 
                   variant="outline"
                   size="sm"
-                  onClick={() => setIsCalculatorOpen(true)}
+                  onClick={() => handleOpenModal("estimate")}
                   className="text-sm"
                 >
                   Get Estimate
                 </Button>
                 <Button 
                   size="sm"
-                  onClick={() => {
-                    const inquirySection = document.getElementById("inquiry");
-                    inquirySection?.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  onClick={() => handleOpenModal("project")}
                 >
                   Start Building
                 </Button>
@@ -71,10 +80,11 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Calculator Modal */}
-          <CalculatorModal
-            open={isCalculatorOpen}
-            onOpenChange={setIsCalculatorOpen}
+          {/* Project Inquiry Modal */}
+          <ProjectInquiryModal
+            open={inquiryModal.open}
+            onOpenChange={(open) => setInquiryModal({ ...inquiryModal, open })}
+            initialMode={inquiryModal.mode}
           />
 
           {/* Mobile Menu Button */}
@@ -128,12 +138,12 @@ const Navbar = () => {
                 >
                   About
                 </a>
-                {isScrolled && (
+                {shouldShowBackground && (
                   <div className="flex flex-col gap-4 pt-4">
                     <Button 
                       variant="outline"
                       onClick={() => {
-                        setIsCalculatorOpen(true);
+                        handleOpenModal("estimate");
                         setIsMenuOpen(false);
                       }}
                       className="opacity-80 hover:opacity-100"
@@ -142,8 +152,7 @@ const Navbar = () => {
                     </Button>
                     <Button 
                       onClick={() => {
-                        const inquirySection = document.getElementById("inquiry");
-                        inquirySection?.scrollIntoView({ behavior: "smooth" });
+                        handleOpenModal("project");
                         setIsMenuOpen(false);
                       }}
                     >

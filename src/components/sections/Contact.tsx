@@ -1,8 +1,15 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
 import { SciFiText } from "../animations/SciFiText";
+import { useState } from "react";
+import { ProjectInquiryModal } from "./ProjectInquiryModal";
 
 const Contact = () => {
+  const [inquiryModal, setInquiryModal] = useState({
+    open: false,
+    mode: "project" as "estimate" | "project"
+  });
+
   return (
     <section className="py-16 bg-primary/5">
       <div className="container mx-auto px-4">
@@ -16,15 +23,18 @@ const Contact = () => {
           <Button 
             size="lg" 
             className="text-lg px-8 w-full sm:w-auto animate-pulse-glow"
-            onClick={() => {
-              const inquirySection = document.getElementById("inquiry");
-              inquirySection?.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={() => setInquiryModal({ open: true, mode: "project" })}
           >
             Start Building
           </Button>
         </div>
       </div>
+      
+      <ProjectInquiryModal
+        open={inquiryModal.open}
+        onOpenChange={(open) => setInquiryModal({ ...inquiryModal, open })}
+        initialMode={inquiryModal.mode}
+      />
     </section>
   );
 };

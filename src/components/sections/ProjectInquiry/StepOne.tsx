@@ -1,3 +1,4 @@
+import React from "react";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -6,13 +7,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { NavigationButtons } from "../NavigationButtons";
-import { PricingDisplay } from "../PricingDisplay";
-import type { StepProps } from "../types";
+import { ProjectInquiryDetails } from "./types";
+import { PricingDisplay } from "../Calculator/PricingDisplay";
 
-export const Step1 = ({ projectDetails, setProjectDetails, estimatedBudget, onNext, onPrev }: StepProps) => {
+interface StepOneProps {
+  projectDetails: ProjectInquiryDetails;
+  setProjectDetails: (details: ProjectInquiryDetails) => void;
+  estimatedBudget: number | null;
+}
+
+export const StepOne: React.FC<StepOneProps> = ({ 
+  projectDetails, 
+  setProjectDetails, 
+  estimatedBudget 
+}) => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="space-y-2">
         <Label>What stage is your project in?</Label>
         <Select
@@ -51,7 +61,7 @@ export const Step1 = ({ projectDetails, setProjectDetails, estimatedBudget, onNe
         </Select>
         {projectDetails.isNGO && (
           <p className="text-sm text-muted-foreground italic">
-            For social causes and NGOs, we offer flexible pricing based on your budget. Let's discuss how we can help you make a difference.
+            For social causes and NGOs, we offer flexible pricing based on your budget.
           </p>
         )}
       </div>
@@ -76,18 +86,13 @@ export const Step1 = ({ projectDetails, setProjectDetails, estimatedBudget, onNe
         </Select>
       </div>
 
-      <PricingDisplay 
-        estimatedBudget={estimatedBudget}
-        isNGO={projectDetails.isNGO}
-        serviceType={projectDetails.serviceType}
-      />
-      <div className="h-16" />
-      <NavigationButtons
-        onPrev={onPrev}
-        onNext={onNext}
-        disablePrev={true}
-        disableNext={!projectDetails.projectStage || !projectDetails.serviceType}
-      />
+      {estimatedBudget !== null && (
+        <PricingDisplay 
+          estimatedBudget={estimatedBudget}
+          isNGO={projectDetails.isNGO}
+          serviceType={projectDetails.serviceType}
+        />
+      )}
     </div>
   );
 };

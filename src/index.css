@@ -103,6 +103,7 @@
     }
   }
 
+  /* Remove problematic shimmer animation */
   @keyframes shimmer {
     from {
       transform: translateX(-200%);
@@ -112,8 +113,10 @@
     }
   }
 
+  /* Completely disable pointer events for shimmer animation */
   .animate-shimmer {
     animation: shimmer 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    pointer-events: none !important;
   }
 
   /* Energy trail effect */

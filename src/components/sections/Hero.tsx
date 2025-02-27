@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { SciFiText } from "../animations/SciFiText";
 import { useEffect, useRef, useState } from "react";
-import { CalculatorModal } from "./CalculatorModal";
+import { ProjectInquiryModal } from "./ProjectInquiryModal";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const SparkleEffects = () => {
@@ -109,7 +109,10 @@ const TextReveal = ({ children, delay = 0 }) => {
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
+  const [inquiryModal, setInquiryModal] = useState({
+    open: false,
+    mode: "project" as "estimate" | "project"
+  });
   const isMobile = useIsMobile();
   
   useEffect(() => {
@@ -127,6 +130,10 @@ const Hero = () => {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  const handleOpenModal = (mode: "estimate" | "project") => {
+    setInquiryModal({ open: true, mode });
+  };
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden">
@@ -179,10 +186,7 @@ const Hero = () => {
               <Button 
                 size="lg"
                 className="w-full sm:w-auto px-8 text-lg relative overflow-hidden animate-pulse-glow"
-                onClick={() => {
-                  const inquirySection = document.getElementById("inquiry");
-                  inquirySection?.scrollIntoView({ behavior: "smooth" });
-                }}
+                onClick={() => handleOpenModal("project")}
               >
                 Start Building
               </Button>
@@ -190,7 +194,7 @@ const Hero = () => {
                 variant="outline"
                 size="lg"
                 className="w-full sm:w-auto px-8 text-lg opacity-80 hover:opacity-100"
-                onClick={() => setIsCalculatorOpen(true)}
+                onClick={() => handleOpenModal("estimate")}
               >
                 Get Estimate
               </Button>
@@ -217,9 +221,10 @@ const Hero = () => {
           </motion.div>
         </div>
       </motion.div>
-      <CalculatorModal 
-        open={isCalculatorOpen} 
-        onOpenChange={setIsCalculatorOpen} 
+      <ProjectInquiryModal
+        open={inquiryModal.open}
+        onOpenChange={(open) => setInquiryModal({ ...inquiryModal, open })}
+        initialMode={inquiryModal.mode}
       />
     </section>
   );

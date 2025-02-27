@@ -7,35 +7,39 @@ export const StepIndicator = ({ currentStep, totalSteps }: StepIndicatorProps) =
   return (
     <div className="mb-6 relative z-10">
       <div className="flex items-center justify-between relative">
-        <div className="absolute top-1/2 left-0 w-full h-0.5 bg-muted/20 -translate-y-1/2" />
+        {/* Background connecting line */}
+        <div className="absolute left-6 top-1/2 right-6 h-0.5 bg-muted/20 -translate-y-1/2 z-0"></div>
+        
+        {/* Progress line */}
         <div 
-          className="absolute top-1/2 left-0 h-0.5 bg-primary/50 -translate-y-1/2 transition-all duration-300"
+          className="absolute left-6 top-1/2 h-0.5 bg-primary/50 -translate-y-1/2 transition-all duration-300 z-0"
           style={{ 
-            width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%`,
+            width: `${((currentStep - 1) / (totalSteps - 1)) * (100 - 12)}%`,
           }}
-        >
-          <div className="absolute right-0 top-1/2 w-4 h-4 -translate-y-1/2 translate-x-full">
-            <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping" />
-          </div>
-        </div>
+        />
+        
+        {/* Step circles */}
         {Array.from({ length: totalSteps }, (_, i) => i + 1).map((i) => (
           <div
             key={i}
             className="relative z-10 w-8 h-8 rounded-full flex items-center justify-center"
           >
+            {/* Solid background circle */}
             <div 
               className={`absolute inset-0 rounded-full transition-all duration-300 ${
-                i < currentStep ? "bg-primary scale-100" :
-                i === currentStep ? "bg-primary/20 scale-110" :
-                "bg-muted/20 scale-100"
+                i < currentStep ? "bg-primary" :
+                i === currentStep ? "bg-primary/20" :
+                "bg-muted"
               }`} 
             />
-            <div 
-              className={`absolute inset-0 rounded-full ${
-                i === currentStep ? "animate-ping bg-primary/20" : ""
-              }`}
-            />
-            <span className={`relative z-10 transition-colors duration-300 ${
+            
+            {/* Ping animation for current step */}
+            {i === currentStep && (
+              <div className="absolute inset-0 rounded-full animate-ping bg-primary/20 pointer-events-none" />
+            )}
+            
+            {/* Step number */}
+            <span className={`relative z-20 transition-colors duration-300 ${
               i < currentStep ? "text-white" :
               i === currentStep ? "text-foreground" :
               "text-foreground/60"
